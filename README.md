@@ -2,9 +2,14 @@
 煎蛋网客户端，功能齐全，开源的最完善版本，作者认真的去写的
 
 ![image](https://raw.githubusercontent.com/jinkh/JianDan/master/ScreenShots/IMG_0999.PNG)
+
 ![image](https://raw.githubusercontent.com/jinkh/JianDan/master/ScreenShots/IMG_1004.PNG)
+
 ![image](https://raw.githubusercontent.com/jinkh/JianDan/master/ScreenShots/IMG_1005.PNG)
+
 ![image](https://raw.githubusercontent.com/jinkh/JianDan/master/ScreenShots//IMG_1007.PNG)
+
+
 
 MVVM架构的使用
 
