@@ -13,6 +13,8 @@
 #import "FLAnimatedImageView+WebCache.h"
 #import "CommentCell.h"
 #import "ShareView.h"
+#import "JTSImageInfo.h"
+#import "JTSImageViewController.h"
 
 @interface PictureDetailView ()<UITableViewDataSource, UITableViewDelegate>
 {
@@ -92,13 +94,20 @@
     CGFloat offY = 0;
     headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, ScreenSize.width, 0+40+15)];
     headerView.dk_backgroundColorPicker  = Cell_Bg;
+    headerView.userInteractionEnabled = YES;
     for (PictureSourceModel *item in myData.pics) {
         NSInteger height = [item.picHeight integerValue]*ScreenSize.width/[item.picWidth integerValue];
         FLAnimatedImageView *picView = [[FLAnimatedImageView alloc] initWithFrame:CGRectMake(0, offY, headerView.frame.size.width, height)];
         picView.dk_backgroundColorPicker  = Controller_Bg;
         picView.clipsToBounds = YES;
+        picView.userInteractionEnabled = YES;
         picView.contentMode = UIViewContentModeScaleAspectFill;
         [headerView addSubview:picView];
+        
+        
+        UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(pictureClicked:)];
+        [picView addGestureRecognizer:gesture];
+        
         
         [picViewArray addObject:picView];
         
@@ -135,9 +144,6 @@
         offY = offY+height;
     }
     headerView.frame = CGRectMake(0, 0, ScreenSize.width, headerView.frame.size.height+offY);
-    
-    UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(headerClicked:)];
-    [headerView addGestureRecognizer:gesture];
     
     UILabel *describLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, offY, headerView.frame.size.width-10, 40)];
     describLabel.backgroundColor = [UIColor clearColor];
@@ -201,10 +207,26 @@
     return [CommentCell heightForCellWithData:[commentArray objectAtIndex:indexPath.row]];
 }
 
--(void)headerClicked:(id)sender
+-(void)pictureClicked:(UITapGestureRecognizer *)gesture
 {
-    ShareView *share = [[ShareView alloc] initWithData:myData];
-    [share showAnimate:YES];
+    FLAnimatedImageView *sender =  (FLAnimatedImageView *)gesture.view;
+    JTSImageInfo *imageInfo = [[JTSImageInfo alloc] init];
+    if (sender.animatedImage) {
+        imageInfo.image = (UIImage *)sender.animatedImage;
+    } else if (sender.image) {
+        imageInfo.image = sender.image;
+    }
+    imageInfo.referenceRect = sender.frame;
+    imageInfo.referenceView = sender.superview;
+    
+    // Setup view controller
+    JTSImageViewController *imageViewer = [[JTSImageViewController alloc]
+                                           initWithImageInfo:imageInfo
+                                           mode:JTSImageViewControllerMode_Image
+                                           backgroundStyle:JTSImageViewControllerBackgroundOption_Blurred];
+    
+    // Present the view controller.
+    [imageViewer showFromViewController:TheAppDelegate.rootNavigationController transition:JTSImageViewControllerTransition_FromOriginalPosition];
 }
 
 -(void)pushCommentWithText:(NSString *)content withParentId:(NSString *)pId
