@@ -1,0 +1,2 @@
+NORMAL   NIGHT
+#ffffff  #343434 BG

@@ -1,0 +1,46 @@
+//
+//  PrefixHeader.pch
+//  DemoApp
+//
+//  Created by Zinkham on 15/10/21.
+//  Copyright © 2015年 Zinkham. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+#ifdef __OBJC__
+
+#import "Macro.h"
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#import <DKNightVersion/DKNightVersion.h>
+#import "ThemeManager.h"
+#import "SettingManager.h"
+#import "UserManager.h"
+#import "UIScrollView+EmptyDataSet.h"
+#import <MagicalRecord/MagicalRecord.h>
+#import "CoreData.h"
+#import "ZHURLImageSize.h"
+#import "ToastHelper.h"
+#import "IQKeyboardManager.h"
+#import "MRCircularProgressView.h"
+#import "NSDictionary+Additions.h"
+#import "AFNetworking.h"
+#import "AFNetworkActivityIndicatorManager.h"
+#import "UIRefreshControl+AFNetworking.h"
+#import "MJRefresh.h"
+#import "UIImageView+WebCache.h"
+#import "UIButton+WebCache.h"
+#import "CATCommon.h"
+#import "UINavigationController+ZHCustomNav.h"
+#import "MBProgressHUD.h"
+#import "UINavigationController+ZHCustomNav.h"
+
+#import "JSONModel.h"
+#import "Models.h"
+#import "ViewModels.h"
+
+#endif
+
+#endif 

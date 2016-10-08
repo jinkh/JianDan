@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9525" systemVersion="14F1505" minimumToolsVersion="Xcode 7.0">
+    <entity name="ArticleModel_CoreData" representedClassName="ArticleModel_CoreData" syncable="YES">
+        <attribute name="author_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comment_count" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="date" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sortTime" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="thumb_c" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="ArticleModel_Read_CoreData" representedClassName="ArticleModel_Read_CoreData" syncable="YES">
+        <attribute name="author_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comment_count" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="date" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sortTime" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="thumb_c" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="BoardPictureModel_CoreData" representedClassName="BoardPictureModel_CoreData" syncable="YES">
+        <attribute name="comment_agent" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comment_approved" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comment_author" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comment_author_email" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comment_author_IP" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comment_author_url" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comment_content" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comment_count" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comment_date" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comment_date_gmt" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comment_ID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comment_karma" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comment_parent" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comment_post_ID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comment_reply_ID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comment_subscribe" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comment_type" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="pics" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="sortTime" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="text_content" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="textHeight" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="textWidth" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="user_id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="vote_ip_pool" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="vote_negative" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="vote_positive" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="JokeModel_CoreData" representedClassName="JokeModel_CoreData" syncable="YES">
+        <attribute name="attributedString" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="comment_agent" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comment_approved" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comment_author" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comment_author_email" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comment_author_IP" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comment_author_url" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comment_content" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comment_count" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comment_date" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comment_date_gmt" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comment_ID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comment_karma" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comment_parent" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comment_post_ID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comment_reply_ID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comment_subscribe" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comment_type" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sortTime" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="text_content" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="textHeight" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="textWidth" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="user_id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="vote_ip_pool" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="vote_negative" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="vote_positive" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="SisterPictureModel_CoreData" representedClassName="SisterPictureModel_CoreData" syncable="YES">
+        <attribute name="comment_agent" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comment_approved" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comment_author" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comment_author_email" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comment_author_IP" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comment_author_url" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comment_content" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comment_count" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comment_date" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comment_date_gmt" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comment_ID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comment_karma" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comment_parent" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comment_post_ID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comment_reply_ID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comment_subscribe" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comment_type" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="pics" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="sortTime" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="text_content" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="textHeight" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="textWidth" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="user_id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="vote_ip_pool" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="vote_negative" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="vote_positive" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="VideoModel_CoreData" representedClassName="VideoModel_CoreData" syncable="YES">
+        <attribute name="create_time" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="hate" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="love" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="profile_image" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sortTime" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="video_uri" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="ArticleModel_CoreData" positionX="-36" positionY="9" width="128" height="165"/>
+        <element name="BoardPictureModel_CoreData" positionX="18" positionY="180" width="128" height="435"/>
+        <element name="JokeModel_CoreData" positionX="-54" positionY="-9" width="128" height="435"/>
+        <element name="SisterPictureModel_CoreData" positionX="0" positionY="171" width="128" height="435"/>
+        <element name="VideoModel_CoreData" positionX="-18" positionY="27" width="128" height="180"/>
+        <element name="ArticleModel_Read_CoreData" positionX="-18" positionY="144" width="128" height="165"/>
+    </elements>
+</model>
