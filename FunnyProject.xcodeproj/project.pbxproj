@@ -4593,7 +4593,7 @@
 					"$(PROJECT_DIR)/FunnyProject/Libs/umeng_ios_social_sdk_5.2.1_arm64_custom/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/FunnyProject/Libs/umeng_ios_social_sdk_5.2.1_arm64_custom/UMSocial_Sdk_Extra_Frameworks/Wechat",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = goodluck.push.baozou;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jinkh.funny;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "8db815c0-2278-43db-8331-009a664167ac";
 				PROVISIONING_PROFILE_SPECIFIER = BaomanReader_Dev;
@@ -4627,7 +4627,7 @@
 					"$(PROJECT_DIR)/FunnyProject/Libs/umeng_ios_social_sdk_5.2.1_arm64_custom/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/FunnyProject/Libs/umeng_ios_social_sdk_5.2.1_arm64_custom/UMSocial_Sdk_Extra_Frameworks/Wechat",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = goodluck.push.baozou;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jinkh.funny;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "693f7962-f40d-41bb-b69a-1e6e28195b17";
 				PROVISIONING_PROFILE_SPECIFIER = BaomanReader_Dev;

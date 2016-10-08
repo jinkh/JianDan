@@ -109,6 +109,12 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>亲，打开相机可以吗？</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>亲，打开麦克风可以吗？</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>亲，打开相册可以吗？</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>iconfont.ttf</string>
@@ -134,11 +140,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>亲，打开相册可以吗？</string>
-	<key>NSCameraUsageDescription</key>
-	<string>亲，打开相机可以吗？</string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>亲，打开麦克风可以吗？</string>
 </dict>
 </plist>
