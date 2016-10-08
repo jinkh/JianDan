@@ -210,6 +210,9 @@
 -(void)pictureClicked:(UITapGestureRecognizer *)gesture
 {
     FLAnimatedImageView *sender =  (FLAnimatedImageView *)gesture.view;
+    if (sender.animatedImage == nil && sender.image == nil) {
+        return;
+    }
     JTSImageInfo *imageInfo = [[JTSImageInfo alloc] init];
     if (sender.animatedImage) {
         imageInfo.image = (UIImage *)sender.animatedImage;
