@@ -1,6 +1,10 @@
 # JianDan
 煎蛋网客户端，功能齐全，开源的最完善版本，作者认真的去写的
 
+Tip：本项目使用pod进行管理，编译运行前请先pod install
+
+
+
 ![image](https://raw.githubusercontent.com/jinkh/JianDan/master/ScreenShots//IMG_1009.PNG)
 
 ![image](https://raw.githubusercontent.com/jinkh/JianDan/master/ScreenShots/IMG_0999.PNG)
