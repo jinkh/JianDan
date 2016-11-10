@@ -58,8 +58,10 @@
     model.content = [model.content stringByReplacingOccurrencesOfString:@"<img" withString:@"<img width=100%"];
     //去掉底部分享部分
     NSRange range = [model.content rangeOfString:@"<div class=\"share-links\"" options:NSBackwardsSearch];
-    model.content = [model.content stringByReplacingCharactersInRange:NSMakeRange(range.location, model.content.length-range.location)
+    if (range.location != NSNotFound) {
+        model.content = [model.content stringByReplacingCharactersInRange:NSMakeRange(range.location, model.content.length-range.location)
                                                            withString:@""];
+    }
 
     
     NSMutableString *html = [NSMutableString string];
