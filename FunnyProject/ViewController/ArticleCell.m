@@ -46,9 +46,10 @@
         [iconView setBackgroundColor:[UIColor lightGrayColor]];
         iconView.clipsToBounds = YES;
         iconView.contentMode = UIViewContentModeScaleAspectFill;
+        conView.hidden = YES;
         [self addSubview:iconView];
         
-        nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(70, 10, ScreenSize.width-80, 25)];
+        nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, ScreenSize.width-20, 25)];
         nameLabel.backgroundColor = [UIColor clearColor];
         nameLabel.font = DefaultFont(16);
         nameLabel.dk_textColorPicker = Text_Title;
@@ -57,14 +58,14 @@
         nameLabel.lineBreakMode = NSLineBreakByTruncatingTail;
         [self addSubview:nameLabel];
         
-        describLabel = [[UILabel alloc] initWithFrame:CGRectMake(70, 50, ScreenSize.width-80, 15)];
+        describLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 50, ScreenSize.width-20, 15)];
         describLabel.backgroundColor = [UIColor clearColor];
         describLabel.font = DefaultFont(13);
         describLabel.textColor = COLOR(153, 153, 153);
         describLabel.textAlignment = NSTextAlignmentLeft;
         [self addSubview:describLabel];
         
-        commentLabel = [[UILabel alloc] initWithFrame:CGRectMake(70, 50, ScreenSize.width-85, 15)];
+        commentLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 50, ScreenSize.width-25, 15)];
         commentLabel.backgroundColor = [UIColor clearColor];
         commentLabel.font = DefaultFont(13);
         commentLabel.textColor = COLOR(153, 153, 153);
