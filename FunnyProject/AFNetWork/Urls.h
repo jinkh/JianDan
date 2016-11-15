@@ -13,13 +13,13 @@
 static NSString* const FreshNewUrl = @"http://i.jandan.net/?oxwlxojflwblxbsapi=get_recent_posts&include=url,date,tags,author,title,comment_count,custom_fields&custom_fields=thumb_c,views&dev=1";
 
 //无聊图列表
-static NSString* const BoredPicturesUrl = @"http://i.jandan.net/?oxwlxojflwblxbsapi=jandan.get_pic_comments&page=";
+static NSString* const BoredPicturesUrl = @"http://i.jandan.net/?oxwlxojflwblxbsapi=jandan.get_pic_comments";
 
 //妹子图
-static NSString* const SisterPicturesUrl = @"http://i.jandan.net/?oxwlxojflwblxbsapi=jandan.get_ooxx_comments&page=";
+static NSString* const SisterPicturesUrl = @"http://i.jandan.net/?oxwlxojflwblxbsapi=jandan.get_ooxx_comments";
 
 //段子
-static NSString* const JokeUrl = @"http://i.jandan.net/?oxwlxojflwblxbsapi=jandan.get_duan_comments&page=";
+static NSString* const JokeUrl = @"http://i.jandan.net/?oxwlxojflwblxbsapi=jandan.get_duan_comments";
 
 //小视频
 static NSString* const LittleMovieUrl = @"http://i.jandan.net/?oxwlxojflwblxbsapi=jandan.get_video_comments&page=";
