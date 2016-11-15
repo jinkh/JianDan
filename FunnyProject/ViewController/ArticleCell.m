@@ -46,7 +46,7 @@
         [iconView setBackgroundColor:[UIColor lightGrayColor]];
         iconView.clipsToBounds = YES;
         iconView.contentMode = UIViewContentModeScaleAspectFill;
-        conView.hidden = YES;
+        iconView.hidden = YES;
         [self addSubview:iconView];
         
         nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, ScreenSize.width-20, 25)];

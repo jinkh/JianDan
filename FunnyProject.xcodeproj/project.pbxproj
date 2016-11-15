@@ -3746,7 +3746,8 @@
 				TargetAttributes = {
 					5A8FD94B1D2DFC270015D6C0 = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = 34M94H63E3;
+						DevelopmentTeam = 9437NAGUWD;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.InAppPurchase = {
 								enabled = 0;
@@ -4575,7 +4576,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Jian Ren (69USC54WEB)";
-				DEVELOPMENT_TEAM = 34M94H63E3;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 9437NAGUWD;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4595,8 +4597,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jinkh.funny;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "8db815c0-2278-43db-8331-009a664167ac";
-				PROVISIONING_PROFILE_SPECIFIER = BaomanReader_Dev;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -4608,8 +4610,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Jian Ren (69USC54WEB)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jian Ren (69USC54WEB)";
-				DEVELOPMENT_TEAM = LVTLUHSYAP;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 9437NAGUWD;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4629,8 +4631,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jinkh.funny;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "693f7962-f40d-41bb-b69a-1e6e28195b17";
-				PROVISIONING_PROFILE_SPECIFIER = BaomanReader_Dev;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
