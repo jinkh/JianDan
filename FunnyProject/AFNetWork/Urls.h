@@ -22,7 +22,7 @@ static NSString* const SisterPicturesUrl = @"http://i.jandan.net/?oxwlxojflwblxb
 static NSString* const JokeUrl = @"http://i.jandan.net/?oxwlxojflwblxbsapi=jandan.get_duan_comments";
 
 //小视频
-static NSString* const LittleMovieUrl = @"http://i.jandan.net/?oxwlxojflwblxbsapi=jandan.get_video_comments&page=";
+static NSString* const LittleMovieUrl = @"http://i.jandan.net/?oxwlxojflwblxbsapi=jandan.get_video_comments";
 
 //评论数量
 static NSString* const CommentCountUrl = @"http://jandan.duoshuo.com/api/threads/counts.json?threads=";
