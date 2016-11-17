@@ -1,0 +1,145 @@
+PODS:
+  - ActionSheetPicker-3.0 (2.2.0)
+  - AFNetworking (3.1.0):
+    - AFNetworking/NSURLSession (= 3.1.0)
+    - AFNetworking/Reachability (= 3.1.0)
+    - AFNetworking/Security (= 3.1.0)
+    - AFNetworking/Serialization (= 3.1.0)
+    - AFNetworking/UIKit (= 3.1.0)
+  - AFNetworking/NSURLSession (3.1.0):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (3.1.0)
+  - AFNetworking/Security (3.1.0)
+  - AFNetworking/Serialization (3.1.0)
+  - AFNetworking/UIKit (3.1.0):
+    - AFNetworking/NSURLSession
+  - DKNightVersion (2.4.0):
+    - DKNightVersion/Core (= 2.4.0)
+    - DKNightVersion/CoreAnimation (= 2.4.0)
+    - DKNightVersion/UIKit (= 2.4.0)
+  - DKNightVersion/Core (2.4.0):
+    - DKNightVersion/Core/DeallocBlockExecutor (= 2.4.0)
+    - DKNightVersion/Core/extobjc (= 2.4.0)
+  - DKNightVersion/Core/DeallocBlockExecutor (2.4.0)
+  - DKNightVersion/Core/extobjc (2.4.0)
+  - DKNightVersion/CoreAnimation (2.4.0):
+    - DKNightVersion/Core
+  - DKNightVersion/UIKit (2.4.0):
+    - DKNightVersion/Core
+  - DZNEmptyDataSet (1.8.1)
+  - EAIntroView (2.7.4):
+    - EARestrictedScrollView (~> 0.2.0)
+  - EARestrictedScrollView (0.2.0)
+  - FMDB (2.6.2):
+    - FMDB/standard (= 2.6.2)
+  - FMDB/standard (2.6.2)
+  - IQKeyboardManager (3.3.7)
+  - iRate (1.11.6)
+  - JSONModel (1.1.2)
+  - MagicalRecord (2.3.2):
+    - MagicalRecord/Core (= 2.3.2)
+  - MagicalRecord/Core (2.3.2)
+  - Masonry (1.0.1)
+  - MBProgressHUD (0.9.2)
+  - MJRefresh (2.4.12)
+  - MRProgress (0.8.3):
+    - MRProgress/ActivityIndicator (= 0.8.3)
+    - MRProgress/Blur (= 0.8.3)
+    - MRProgress/Circular (= 0.8.3)
+    - MRProgress/Icons (= 0.8.3)
+    - MRProgress/NavigationBarProgress (= 0.8.3)
+    - MRProgress/Overlay (= 0.8.3)
+  - MRProgress/ActivityIndicator (0.8.3):
+    - MRProgress/Stopable
+  - MRProgress/Blur (0.8.3):
+    - MRProgress/Helper
+  - MRProgress/Circular (0.8.3):
+    - MRProgress/Helper
+    - MRProgress/ProgressBaseClass
+    - MRProgress/Stopable
+  - MRProgress/Helper (0.8.3)
+  - MRProgress/Icons (0.8.3)
+  - MRProgress/NavigationBarProgress (0.8.3):
+    - MRProgress/ProgressBaseClass
+  - MRProgress/Overlay (0.8.3):
+    - MRProgress/ActivityIndicator
+    - MRProgress/Blur
+    - MRProgress/Circular
+    - MRProgress/Helper
+    - MRProgress/Icons
+  - MRProgress/ProgressBaseClass (0.8.3)
+  - MRProgress/Stopable (0.8.3):
+    - MRProgress/Helper
+  - NJKWebViewProgress (0.2.3):
+    - NJKWebViewProgress/Core (= 0.2.3)
+    - NJKWebViewProgress/ProgressView (= 0.2.3)
+  - NJKWebViewProgress/Core (0.2.3)
+  - NJKWebViewProgress/ProgressView (0.2.3)
+  - pop (1.0.9)
+  - PopMenu (2.4):
+    - pop
+    - XHRealTimeBlur
+  - PureLayout (3.0.2)
+  - QBPopupMenu (2.0)
+  - RDVTabBarController (1.1.9)
+  - TTTAttributedLabel (1.13.4)
+  - ViewDeck (2.4.2)
+  - XHRealTimeBlur (1.7)
+  - ZipArchive (1.4.0)
+
+DEPENDENCIES:
+  - ActionSheetPicker-3.0 (~> 2.2.0)
+  - AFNetworking (~> 3.1.0)
+  - DKNightVersion
+  - DZNEmptyDataSet
+  - EAIntroView (~> 2.7.4)
+  - FMDB (~> 2.5)
+  - IQKeyboardManager
+  - iRate
+  - JSONModel (~> 1.1.2)
+  - MagicalRecord (~> 2.3.0)
+  - Masonry
+  - MBProgressHUD (~> 0.9.1)
+  - MJRefresh (~> 2.4.12)
+  - MRProgress
+  - NJKWebViewProgress
+  - PopMenu (~> 2.4)
+  - PureLayout
+  - QBPopupMenu
+  - RDVTabBarController (~> 1.1.9)
+  - TTTAttributedLabel (~> 1.13.4)
+  - ViewDeck (~> 2.4.2)
+  - ZipArchive (~> 1.4.0)
+
+SPEC CHECKSUMS:
+  ActionSheetPicker-3.0: d11a4c12c6aaf704b8a3f56d179198c99f3e41e6
+  AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
+  DKNightVersion: a46e6623767216cbff843192f9eac1a5aa177a44
+  DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
+  EAIntroView: 50b85eedf414260e61330070ffe5947e72493a62
+  EARestrictedScrollView: f86d61e16c61d3e93c84f8e96e83122a2a3b7631
+  FMDB: 854a0341b4726e53276f2a8996f06f1b80f9259a
+  IQKeyboardManager: 249c3946acf61345c18b038eb50863fe2793e3a8
+  iRate: 61e558919c4a7fde63b3c22ebbd6c114a1eee658
+  JSONModel: 216584d0311b053ff714f1d6cb700dbf890847bc
+  MagicalRecord: 53bed74b4323b930992a725be713e53b37d19755
+  Masonry: a1a931a0d08870ed8ae415a2ea5ea68ebcac77df
+  MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
+  MJRefresh: ca8e9589895977df32d379d46e6b8a5450b3ff44
+  MRProgress: 16de7cc9f347e8846797a770db102a323fe7ef09
+  NJKWebViewProgress: f481fd424cb5ecc27eacae11b5397db92fba9a4d
+  pop: f667631a5108a2e60d9e8797c9b32ddaf2080bce
+  PopMenu: 26b97baeaf250070f4f61b93727ca86d127d7bc5
+  PureLayout: 4d550abe49a94f24c2808b9b95db9131685fe4cd
+  QBPopupMenu: e370cbc7ad8a8d09afe1726117aa18f92696f66a
+  RDVTabBarController: 67794f7a7a37f8e32f046f85ac67d06ab92d624a
+  TTTAttributedLabel: 0a2ac7b2dd726d32a070dafb01446026b11e624f
+  ViewDeck: 0b7b83bc2782a20dfb76207d0a2e8c5e6a6d182d
+  XHRealTimeBlur: 661fadd5691ba2d349758e8fd5fbdb499ac55f8c
+  ZipArchive: e25a4373192673e3229ac8d6e9f64a3e5713c966
+
+PODFILE CHECKSUM: 6386fd452138fc36a0ebbf7d04a4afbcea06076e
+
+COCOAPODS: 1.0.1

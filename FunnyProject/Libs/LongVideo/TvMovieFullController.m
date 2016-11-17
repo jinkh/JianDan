@@ -72,6 +72,14 @@
     [self.view addSubview:movieView];
 }
 
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    if (movieView.superview != self.view) {
+        [self.view addSubview:movieView];
+    }
+}
+
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];

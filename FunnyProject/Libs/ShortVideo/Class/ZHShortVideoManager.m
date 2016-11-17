@@ -110,7 +110,7 @@ static BOOL shouldAutoPaly;
             isShowInWindow = showInWindow;
             
             
-            if (isShowInWindow) {
+            if (isShowInWindow && ![[self getPresentedViewController] isKindOfClass:[TvMovieFullController class]]) {
                 //scrollview 左右滑动导致可见状态变化
                 CGRect rect = [chekView convertRect:chekView.frame toView:[UIApplication sharedApplication].keyWindow];
                 BOOL visible = rect.origin.x >= 0 && (rect.origin.x+rect.size.width) <= [UIScreen mainScreen].bounds.size.width;
