@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+#define Clear_Fav_Data_Change_Notify @"Clear_Fav_Data_Change_Notify"
+
 @interface SettingManager : NSObject
 
 +(NSArray *)getOrginLeftContentMenuTitles;

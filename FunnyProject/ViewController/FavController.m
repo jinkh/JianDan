@@ -83,6 +83,7 @@
         }
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(restOrder:) name:Fav_Menu_Order_Reset_Notify object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(clearFavDataChanged:) name:Clear_Fav_Data_Change_Notify object:nil];
     }
     return self;
 }
@@ -99,6 +100,13 @@
 //        [NSInvocation doInstanceMethodTarget:controller selectorName:@"mjRefreshData" args:nil];
 //    }
 //}
+
+-(void)clearFavDataChanged:(NSNotification *)notify
+{
+    for (UIViewController *controller in contentArray) {
+        [NSInvocation doInstanceMethodTarget:controller selectorName:@"mjRefreshData" args:nil];
+    }
+}
 
 -(UIView *)contentViewForPagerAtIndex:(NSInteger)index
 {

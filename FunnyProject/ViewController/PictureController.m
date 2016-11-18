@@ -185,6 +185,7 @@
     } else {
         [myTableView.header endRefreshing];
     }
+    [myTableView reloadEmptyDataSet];
 }
 
 

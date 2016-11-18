@@ -175,6 +175,7 @@ static YWFeedbackKit *feedbackKit;
             alertView.rightBlock = ^{
                 [SettingManager cleanUpDbWithcompletedBlock:^(BOOL result) {
                     [[ToastHelper sharedToastHelper] toast:@"清空数据成功"];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:Clear_Fav_Data_Change_Notify object:nil];
                 }];
             };
         }

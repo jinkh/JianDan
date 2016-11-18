@@ -193,6 +193,7 @@
             cell = [myTableView dequeueReusableCellWithIdentifier:CellIdentifier];
         }
     }
+    [myTableView reloadEmptyDataSet];
 }
 
 -(void)mjLoadMore
