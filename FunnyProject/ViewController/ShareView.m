@@ -460,52 +460,48 @@
                     [ArticleViewModel deleteFavWithModel:data];
                     [[ToastHelper sharedToastHelper] toast:@"取消收藏"];
                 } else {
-                    [ArticleViewModel saveFavWithModel:data withBlock:^(BOOL result) {
-                        if (result) {
-                            [[ToastHelper sharedToastHelper] toast:@"收藏成功"];
-                        } else {
-                            [[ToastHelper sharedToastHelper] toast:@"收藏失败"];
-                        }
-                    }];
+                    BOOL result = [ArticleViewModel saveFavWithModel:data];
+                    if (result) {
+                        [[ToastHelper sharedToastHelper] toast:@"收藏成功"];
+                    } else {
+                        [[ToastHelper sharedToastHelper] toast:@"收藏失败"];
+                    }
                 }
             } else if ([data isKindOfClass:[PictureModel class]]) {
                 if ([PictureViewModel isFavWithModel:data withType:((PictureModel*)data).comment_type]) {
                     [PictureViewModel deleteFavWithModel:data withType:((PictureModel*)data).comment_type];
                     [[ToastHelper sharedToastHelper] toast:@"取消收藏"];
                 } else {
-                    [PictureViewModel saveFavWithModel:data withBlock:^(BOOL result) {
-                        if (result) {
-                            [[ToastHelper sharedToastHelper] toast:@"收藏成功"];
-                        } else {
-                            [[ToastHelper sharedToastHelper] toast:@"收藏失败"];
-                        }
-                    } withType:((PictureModel*)data).comment_type];
+                    BOOL result = [PictureViewModel saveFavWithModel:data withType:((PictureModel*)data).comment_type];
+                    if (result) {
+                        [[ToastHelper sharedToastHelper] toast:@"收藏成功"];
+                    } else {
+                        [[ToastHelper sharedToastHelper] toast:@"收藏失败"];
+                    }
                 }
             } else if ([data isKindOfClass:[JokeModel class]]) {
                 if ([JokeViewModel isFavWithModel:data]) {
                     [JokeViewModel deleteFavWithModel:data];
                     [[ToastHelper sharedToastHelper] toast:@"取消收藏"];
                 } else {
-                    [JokeViewModel saveFavWithModel:data withBlock:^(BOOL result) {
-                        if (result) {
-                            [[ToastHelper sharedToastHelper] toast:@"收藏成功"];
-                        } else {
-                            [[ToastHelper sharedToastHelper] toast:@"收藏失败"];
-                        }
-                    }];
+                   BOOL result = [JokeViewModel saveFavWithModel:data];
+                    if (result) {
+                        [[ToastHelper sharedToastHelper] toast:@"收藏成功"];
+                    } else {
+                        [[ToastHelper sharedToastHelper] toast:@"收藏失败"];
+                    }
                 }
             } else if ([data isKindOfClass:[VideoModel class]]) {
                 if ([VideoViewModel isFavWithModel:data]) {
                     [VideoViewModel deleteFavWithModel:data];
                     [[ToastHelper sharedToastHelper] toast:@"取消收藏"];
                 } else {
-                    [VideoViewModel saveFavWithModel:data withBlock:^(BOOL result) {
-                        if (result) {
-                            [[ToastHelper sharedToastHelper] toast:@"收藏成功"];
-                        } else {
-                            [[ToastHelper sharedToastHelper] toast:@"收藏失败"];
-                        }
-                    }];
+                    BOOL result = [VideoViewModel saveFavWithModel:data];
+                    if (result) {
+                        [[ToastHelper sharedToastHelper] toast:@"收藏成功"];
+                    } else {
+                        [[ToastHelper sharedToastHelper] toast:@"收藏失败"];
+                    }
                 }
             }
             [[NSNotificationCenter defaultCenter] postNotificationName:Rerfresh_CommednBar_Notify object:data];

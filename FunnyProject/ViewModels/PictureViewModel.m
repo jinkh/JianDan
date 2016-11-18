@@ -261,7 +261,7 @@
 }
 
 
-+(void)saveFavWithModel:(id)model withBlock:(void(^)(BOOL result))block withType:(NSString *)type
++(BOOL)saveFavWithModel:(id)model withType:(NSString *)type
 {
     Class class = nil;
     if ([type isEqualToString:BoredPicturesUrl]) {
@@ -281,10 +281,7 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:Picture_Fav_Data_Change_Notify object:model];
         });
     }
-    
-    if (block) {
-        block(YES);
-    }
+    return YES;
 }
 
 +(void)deleteFavWithModel:(id)model withType:(NSString *)type

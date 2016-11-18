@@ -180,7 +180,7 @@
     return returnValue;
 }
 
-+(void)saveFavWithModel:(id)model withBlock:(void(^)(BOOL result)) block
++(BOOL)saveFavWithModel:(id)model
 {
     ArticleModel *data = model;
     
@@ -193,10 +193,7 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:Article_Fav_Data_Change_Notify object:model];
         });
     }
-
-    if (block) {
-         block(YES);
-    }
+    return YES;
 }
 
 +(void)deleteFavWithModel:(id)model

@@ -101,15 +101,17 @@
 
 -(void)favDataChanged:(NSNotification *)notify
 {
-    if (isFavType) {
-        id object = notify.object;
-        if ([dataArray containsObject:object]) {
-            [dataArray removeObject:object];
-        } else {
-            [dataArray insertObject:object atIndex:0];
+    @synchronized (dataArray) {
+        if (isFavType) {
+            id object = notify.object;
+            if ([dataArray containsObject:object]) {
+                [dataArray removeObject:object];
+            } else {
+                [dataArray insertObject:object atIndex:0];
+            }
+            viewModel.favOffset = dataArray.count;
+            [myTableView reloadData];
         }
-        viewModel.favOffset = dataArray.count;
-        [myTableView reloadData];
     }
 }
 

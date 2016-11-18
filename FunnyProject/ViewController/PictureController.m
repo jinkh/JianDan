@@ -100,16 +100,18 @@
 
 -(void)favDataChanged:(NSNotification *)notify
 {
-    if (isFavType) {
-        PictureModel *object = notify.object;
-        if ([urlString isEqualToString:object.comment_type]) {
-            if ([dataArray containsObject:object]) {
-                [dataArray removeObject:object];
-            } else {
-                [dataArray insertObject:object atIndex:0];
+    @synchronized (dataArray) {
+        if (isFavType) {
+            PictureModel *object = notify.object;
+            if ([urlString isEqualToString:object.comment_type]) {
+                if ([dataArray containsObject:object]) {
+                    [dataArray removeObject:object];
+                } else {
+                    [dataArray insertObject:object atIndex:0];
+                }
+                viewModel.favOffset = dataArray.count;
+                [myTableView reloadData];
             }
-            viewModel.favOffset = dataArray.count;
-            [myTableView reloadData];
         }
     }
 }

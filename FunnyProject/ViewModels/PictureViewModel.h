@@ -29,7 +29,7 @@
 
 +(NSArray*)fetchFavListWithOffset:(NSInteger)offset withSize:(NSInteger)size withType:(NSString *)type;
 
-+(void)saveFavWithModel:(id)model withBlock:(void(^)(BOOL result))block withType:(NSString *)type;
++(BOOL)saveFavWithModel:(id)model withType:(NSString *)type;
 
 +(void)deleteFavWithModel:(id)model withType:(NSString *)type;
 

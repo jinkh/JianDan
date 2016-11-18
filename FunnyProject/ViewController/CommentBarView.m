@@ -260,10 +260,8 @@
 
 -(void)favAction:(UIButton *)sender
 {
-    @synchronized (self) {
-        if (self.delegate && [self.delegate respondsToSelector:@selector(favAction)]) {
-            [self.delegate favAction];
-        }
+    if (self.delegate && [self.delegate respondsToSelector:@selector(favAction)]) {
+        [self.delegate favAction];
     }
 }
 

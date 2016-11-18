@@ -132,14 +132,13 @@
         [[ToastHelper sharedToastHelper] toast:@"取消收藏"];
         [toolBarView resetFavSate:NO];
     } else {
-        [PictureViewModel saveFavWithModel:model withBlock:^(BOOL result) {
-            if (result) {
-                [[ToastHelper sharedToastHelper] toast:@"收藏成功"];
-                [toolBarView resetFavSate:YES];
-            } else {
-                [[ToastHelper sharedToastHelper] toast:@"收藏失败"];
-            }
-        } withType:typeUrlStr];
+        BOOL result = [PictureViewModel saveFavWithModel:model withType:typeUrlStr];
+        if (result) {
+            [[ToastHelper sharedToastHelper] toast:@"收藏成功"];
+            [toolBarView resetFavSate:YES];
+        } else {
+            [[ToastHelper sharedToastHelper] toast:@"收藏失败"];
+        }
     }
     if (_isFavType) {
         [TheAppDelegate.rootNavigationController popViewControllerAnimated:YES];
