@@ -254,15 +254,16 @@
         [self dismissKeyboardAndClear];
         return NO;
     }
-    
     return YES;
 }
 
 
 -(void)favAction:(UIButton *)sender
 {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(favAction)]) {
-        [self.delegate favAction];
+    @synchronized (self) {
+        if (self.delegate && [self.delegate respondsToSelector:@selector(favAction)]) {
+            [self.delegate favAction];
+        }
     }
 }
 
