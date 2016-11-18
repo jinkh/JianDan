@@ -23,7 +23,7 @@
 #define Cell_Bg DKColorPickerWithColors(Cell_Bg_Noraml, Cell_Bg_Night)
 
 #define Text_Title_Noraml COLORA(9, 9, 9,.7)
-#define Text_Title_Night  COLORA(255, 255, 1255,.7)
+#define Text_Title_Night  COLORA(255, 255, 255,.7)
 #define Text_Title DKColorPickerWithColors(Text_Title_Noraml, Text_Title_Night)
 
 #define Sep_Bg_Noraml COLORA(236, 236, 236, 1)

@@ -341,9 +341,7 @@
 		5AF5D1E31D2F7CBA004070D7 /* UIImageView+GeometryConversion.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AF5D0A91D2F7CBA004070D7 /* UIImageView+GeometryConversion.m */; };
 		5AF5D1E41D2F7CBA004070D7 /* UIImageView+Letters.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AF5D0AB1D2F7CBA004070D7 /* UIImageView+Letters.m */; };
 		5AF5D1E51D2F7CBA004070D7 /* UIImageView+Reflect.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AF5D0AD1D2F7CBA004070D7 /* UIImageView+Reflect.m */; };
-		5AF5D1E61D2F7CBA004070D7 /* UILabel+AutomaticWriting.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AF5D0B01D2F7CBA004070D7 /* UILabel+AutomaticWriting.m */; };
 		5AF5D1E71D2F7CBA004070D7 /* UILabel+AutoSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AF5D0B21D2F7CBA004070D7 /* UILabel+AutoSize.m */; };
-		5AF5D1E81D2F7CBA004070D7 /* UILabel+ESAdjustableLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AF5D0B41D2F7CBA004070D7 /* UILabel+ESAdjustableLabel.m */; };
 		5AF5D1E91D2F7CBA004070D7 /* UILabel+SuggestSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AF5D0B61D2F7CBA004070D7 /* UILabel+SuggestSize.m */; };
 		5AF5D1EA1D2F7CBA004070D7 /* UINavigationBar+Awesome.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AF5D0B91D2F7CBA004070D7 /* UINavigationBar+Awesome.m */; };
 		5AF5D1EB1D2F7CBA004070D7 /* UINavigationBar+CustomHeight.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AF5D0BB1D2F7CBA004070D7 /* UINavigationBar+CustomHeight.m */; };
@@ -1182,12 +1180,8 @@
 		5AF5D0AB1D2F7CBA004070D7 /* UIImageView+Letters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+Letters.m"; sourceTree = "<group>"; };
 		5AF5D0AC1D2F7CBA004070D7 /* UIImageView+Reflect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+Reflect.h"; sourceTree = "<group>"; };
 		5AF5D0AD1D2F7CBA004070D7 /* UIImageView+Reflect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+Reflect.m"; sourceTree = "<group>"; };
-		5AF5D0AF1D2F7CBA004070D7 /* UILabel+AutomaticWriting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+AutomaticWriting.h"; sourceTree = "<group>"; };
-		5AF5D0B01D2F7CBA004070D7 /* UILabel+AutomaticWriting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+AutomaticWriting.m"; sourceTree = "<group>"; };
 		5AF5D0B11D2F7CBA004070D7 /* UILabel+AutoSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+AutoSize.h"; sourceTree = "<group>"; };
 		5AF5D0B21D2F7CBA004070D7 /* UILabel+AutoSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+AutoSize.m"; sourceTree = "<group>"; };
-		5AF5D0B31D2F7CBA004070D7 /* UILabel+ESAdjustableLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+ESAdjustableLabel.h"; sourceTree = "<group>"; };
-		5AF5D0B41D2F7CBA004070D7 /* UILabel+ESAdjustableLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+ESAdjustableLabel.m"; sourceTree = "<group>"; };
 		5AF5D0B51D2F7CBA004070D7 /* UILabel+SuggestSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+SuggestSize.h"; sourceTree = "<group>"; };
 		5AF5D0B61D2F7CBA004070D7 /* UILabel+SuggestSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+SuggestSize.m"; sourceTree = "<group>"; };
 		5AF5D0B81D2F7CBA004070D7 /* UINavigationBar+Awesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+Awesome.h"; sourceTree = "<group>"; };
@@ -3026,12 +3020,8 @@
 		5AF5D0AE1D2F7CBA004070D7 /* UILable */ = {
 			isa = PBXGroup;
 			children = (
-				5AF5D0AF1D2F7CBA004070D7 /* UILabel+AutomaticWriting.h */,
-				5AF5D0B01D2F7CBA004070D7 /* UILabel+AutomaticWriting.m */,
 				5AF5D0B11D2F7CBA004070D7 /* UILabel+AutoSize.h */,
 				5AF5D0B21D2F7CBA004070D7 /* UILabel+AutoSize.m */,
-				5AF5D0B31D2F7CBA004070D7 /* UILabel+ESAdjustableLabel.h */,
-				5AF5D0B41D2F7CBA004070D7 /* UILabel+ESAdjustableLabel.m */,
 				5AF5D0B51D2F7CBA004070D7 /* UILabel+SuggestSize.h */,
 				5AF5D0B61D2F7CBA004070D7 /* UILabel+SuggestSize.m */,
 			);
@@ -4212,7 +4202,6 @@
 				5AF5D3851D34A0CC004070D7 /* NSData+ImageContentType.m in Sources */,
 				5AF5D1E01D2F7CBA004070D7 /* UIImageView+Addition.m in Sources */,
 				5AD5D2991D48C0AB00E8E5EE /* ArticleModel_Read_CoreData+CoreDataProperties.m in Sources */,
-				5AF5D1E61D2F7CBA004070D7 /* UILabel+AutomaticWriting.m in Sources */,
 				5AF5D1D81D2F7CBA004070D7 /* UIImage+Orientation.m in Sources */,
 				5A97C6D91D40BBF700CBF483 /* TvVideoMenuView.m in Sources */,
 				5AF5D3451D335C9A004070D7 /* NSDate+DateTools.m in Sources */,
@@ -4391,7 +4380,6 @@
 				5A8FD9511D2DFC270015D6C0 /* main.m in Sources */,
 				5AF5D20F1D2F7CBA004070D7 /* UIView+CustomBorder.m in Sources */,
 				5AF5D1FF1D2F7CBA004070D7 /* UITableView+FDIndexPathHeightCache.m in Sources */,
-				5AF5D1E81D2F7CBA004070D7 /* UILabel+ESAdjustableLabel.m in Sources */,
 				5AF5D3921D34A0CC004070D7 /* UIImageView+WebCache.m in Sources */,
 				5AF5D38C1D34A0CC004070D7 /* SDWebImagePrefetcher.m in Sources */,
 				5AF5D1631D2F7CBA004070D7 /* NSDate+InternetDateTime.m in Sources */,

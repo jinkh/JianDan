@@ -56,7 +56,9 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [[NSNotificationCenter defaultCenter] postNotificationName:Rest_Table_Position_Article_Notify object:[myData objectAtIndex:pagerView.selectDataIndex]];
+    if (pagerView.selectDataIndex < myData.count) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:Rest_Table_Position_Article_Notify object:[myData objectAtIndex:pagerView.selectDataIndex]];
+    }
     self.navigationController.zh_fullscreenPopWidth = ScreenSize.width;
 }
 
@@ -77,10 +79,6 @@
     [self.view addSubview:toolBarView];
     ArticleModel *model = [myData objectAtIndex:origSelectIndex];
     [toolBarView resetFavSate:[ArticleViewModel isFavWithModel:model]];
-    
-    if (_isFavType) {
-        pagerView.pageEnabled = NO;
-    }
 }
 
 //ZHPagerLongViewDelegate
@@ -138,6 +136,9 @@
                 [[ToastHelper sharedToastHelper] toast:@"收藏失败"];
             }
         }];
+    }
+    if (_isFavType) {
+        [TheAppDelegate.rootNavigationController popViewControllerAnimated:YES];
     }
 }
 
