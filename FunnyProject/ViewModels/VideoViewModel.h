@@ -13,6 +13,8 @@
 
 @property (assign, nonatomic) BOOL isRandom;
 
+@property (assign, nonatomic) BOOL isFavType;
+
 -(NSURLSessionDataTask *)fetchVideoList:(ReturnBlock) returnBlock;
 
 -(NSURLSessionDataTask *)fetchNextVideoList:(ReturnBlock) returnBlock;

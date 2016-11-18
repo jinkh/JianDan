@@ -19,6 +19,7 @@
 -(void)pictureDetailWithData:(id)data withIndex:(NSInteger)index withType:(NSString *)typeUrl;
 
 @property (assign, nonatomic) BOOL isRandom;
+@property (assign, nonatomic) BOOL isFavType;
 
 
 //special

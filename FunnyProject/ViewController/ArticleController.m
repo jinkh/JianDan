@@ -72,6 +72,7 @@
     isFetchingData = NO;
     viewModel = [[ArticleViewModel alloc] init];
     viewModel.isRandom = isRandom;
+    viewModel.isFavType = isFavType;
     
     myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     myTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -133,15 +134,9 @@
     isFetchingData = YES;
     [myTableView.footer resetNoMoreData];
     __weak typeof(self) weakSelf = self;
-
-    
-    if (isFavType) {
-        [weakSelf dealFavRefreshWithValue:[ArticleViewModel fetchFavListWithPage:1 withSize:25]];
-    } else {
-        [viewModel fetchNewArticleList:^(NetReturnValue *returnValue) {
-            [weakSelf deallRefreshWithValue:returnValue];
-        }];
-    }
+    [viewModel fetchNewArticleList:^(NetReturnValue *returnValue) {
+        [weakSelf deallRefreshWithValue:returnValue];
+    }];
 }
 
 -(void)dealFavRefreshWithValue:(NSArray *)data
@@ -184,13 +179,9 @@
     }
     isFetchingData = YES;
     __weak typeof(self) weakSelf = self;
-    if (isFavType) {
-        [weakSelf dealFavLoadMoreWithValue: [ArticleViewModel fetchFavListWithPage:1+dataArray.count/25 withSize:25]];
-    } else {
-        [viewModel fetchNextNewArticleList:^(NetReturnValue *returnValue) {
-            [weakSelf deallLoadModeWithValue:returnValue];
-        }];
-    }
+    [viewModel fetchNextNewArticleList:^(NetReturnValue *returnValue) {
+        [weakSelf deallLoadModeWithValue:returnValue];
+    }];
 }
 
 

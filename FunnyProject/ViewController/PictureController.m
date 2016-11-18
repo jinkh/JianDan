@@ -71,6 +71,7 @@
     
     viewModel = [[PictureViewModel alloc] initWithUrl:urlString];
     viewModel.isRandom = isRandom;
+    viewModel.isFavType = isFavType;
     
     myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
     myTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -133,14 +134,9 @@
     isFetchingData = YES;
     [myTableView.footer resetNoMoreData];
     __weak typeof(self) weakSelf = self;
-
-    if (isFavType) {
-        [weakSelf dealFavRefreshWithValue:[PictureViewModel fetchFavListWithPage:1 withSize:25 withType:urlString]];
-    } else {
-        [viewModel fetchPictureList:^(NetReturnValue *returnValue) {
-            [weakSelf deallRefreshWithValue:returnValue];
-        }];
-    }
+    [viewModel fetchPictureList:^(NetReturnValue *returnValue) {
+        [weakSelf deallRefreshWithValue:returnValue];
+    }];
 }
 
 -(void)dealFavRefreshWithValue:(NSArray *)data
@@ -185,14 +181,9 @@
      NSLog(@"--------开始加载更多");
     isFetchingData = YES;
     __weak typeof(self) weakSelf = self;
-    
-    if (isFavType) {
-        [weakSelf dealFavLoadMoreWithValue: [PictureViewModel fetchFavListWithPage:1+dataArray.count/25 withSize:25 withType:urlString]];
-    } else {
-        [viewModel fetchNextPictureList:^(NetReturnValue *returnValue) {
-            [weakSelf deallLoadModeWithValue:returnValue];
-        }];
-    }
+    [viewModel fetchNextPictureList:^(NetReturnValue *returnValue) {
+        [weakSelf deallLoadModeWithValue:returnValue];
+    }];
 }
 
 -(void)dealFavLoadMoreWithValue:(NSArray *)data

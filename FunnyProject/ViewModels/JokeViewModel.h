@@ -17,6 +17,7 @@
 -(void)jokeDetailWithData:(id)data withIndex:(NSInteger)index;
 
 @property (assign, nonatomic) BOOL isRandom;
+@property (assign, nonatomic) BOOL isFavType;
 
 //MagicRecord
 +(BOOL)isFavWithModel:(id)model;

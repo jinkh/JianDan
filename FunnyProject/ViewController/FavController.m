@@ -14,6 +14,7 @@
 #import "JokeController.h"
 #import "VideoController.h"
 #import "FavMenuSortController.h"
+#import "NSInvocation+Bb.h"
 
 @interface FavController ()
 
@@ -89,6 +90,14 @@
 -(void)viewDidLoad
 {
     [super viewDidLoad];
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    for (UIViewController *controller in contentArray) {
+        [NSInvocation doInstanceMethodTarget:controller selectorName:@"mjRefreshData" args:nil];
+    }
 }
 
 -(UIView *)contentViewForPagerAtIndex:(NSInteger)index

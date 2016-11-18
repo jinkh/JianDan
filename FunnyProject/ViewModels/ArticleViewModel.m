@@ -39,10 +39,23 @@
             page = 1;
         }
         isNoMoreData = NO;
-        NSString *urlStr = [NSString stringWithFormat:@"%@&page=%ld", FreshNewUrl, page];
-        return [AFNetworkClient netRequestGetWithUrl:urlStr withParameter:nil withBlock:^(id data, FinishRequestType finishType, NSError *error) {
-             [self deallWithReturnData:data withFinishType:finishType withError:error withBlock:returnBlock];
-        }];
+        if (_isFavType) {
+            NetReturnValue *value = [[NetReturnValue alloc] init];
+            value.finishType = REQUEST_SUCESS;
+            value.error = nil;
+            value.data = [ArticleViewModel fetchFavListWithPage:page withSize:PageSize];
+            if (value.data == nil
+                || ([value.data isKindOfClass:[NSArray class]] && ((NSArray *)value.data).count < PageSize)) {
+                value.finishType = REQUEST_NO_MORE_DATA;
+            }
+            returnBlock(value);
+            return nil;
+        } else {
+            NSString *urlStr = [NSString stringWithFormat:@"%@&page=%ld", FreshNewUrl, page];
+            return [AFNetworkClient netRequestGetWithUrl:urlStr withParameter:nil withBlock:^(id data, FinishRequestType finishType, NSError *error) {
+                [self deallWithReturnData:data withFinishType:finishType withError:error withBlock:returnBlock];
+            }];
+        }
     }
 }
 
@@ -62,10 +75,23 @@
         } else {
             page++;
         }
-        NSString *urlStr = [NSString stringWithFormat:@"%@&page=%ld", FreshNewUrl, page];
-        return [AFNetworkClient netRequestGetWithUrl:urlStr withParameter:nil withBlock:^(id data, FinishRequestType finishType, NSError *error) {
-            [self deallWithReturnData:data withFinishType:finishType withError:error withBlock:returnBlock];
-        }];
+        if (_isFavType) {
+            NetReturnValue *value = [[NetReturnValue alloc] init];
+            value.finishType = REQUEST_SUCESS;
+            value.error = nil;
+            value.data = [ArticleViewModel fetchFavListWithPage:page withSize:PageSize];
+            if (value.data == nil
+                || ([value.data isKindOfClass:[NSArray class]] && ((NSArray *)value.data).count < PageSize)) {
+                value.finishType = REQUEST_NO_MORE_DATA;
+            }
+            returnBlock(value);
+            return nil;
+        } else {
+            NSString *urlStr = [NSString stringWithFormat:@"%@&page=%ld", FreshNewUrl, page];
+            return [AFNetworkClient netRequestGetWithUrl:urlStr withParameter:nil withBlock:^(id data, FinishRequestType finishType, NSError *error) {
+                [self deallWithReturnData:data withFinishType:finishType withError:error withBlock:returnBlock];
+            }];
+        }
     }
 }
 

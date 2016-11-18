@@ -46,27 +46,40 @@
             page = 1;
         }
         isNoMoreData = NO;
-        //百思不得姐
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        
-        [dateFormatter setDateFormat:@"yyyyMMddHHmmss"];
-        NSString *timeString = [dateFormatter stringFromDate:[NSDate date]];
-        
-        NSString *urlStr = @"http://route.showapi.com/255-1";
-        
-        NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                    @"22249", @"showapi_appid",
-                                    @"41",@"type",
-                                    timeString,@"showapi_timestamp",
-                                    [NSNumber numberWithInteger:page],@"page",nil];
-        
-        NSString *signString=[CATCommon signWithParmString:dic];
-        [dic setObject:signString forKey:@"showapi_sign"];
-        [dic setObject:@"" forKey:@"title"];
-        
-        return [AFNetworkClient netRequestGetWithUrl:urlStr withParameter:dic withBlock:^(id data, FinishRequestType finishType, NSError *error) {
-            [self deallWithReturnData:data withFinishType:finishType withError:error withBlock:returnBlock];
-        }];
+        if (_isFavType) {
+            NetReturnValue *value = [[NetReturnValue alloc] init];
+            value.finishType = REQUEST_SUCESS;
+            value.error = nil;
+            value.data = [VideoViewModel fetchFavListWithPage:page withSize:PageSize];
+            if (value.data == nil
+                || ([value.data isKindOfClass:[NSArray class]] && ((NSArray *)value.data).count < PageSize)) {
+                value.finishType = REQUEST_NO_MORE_DATA;
+            }
+            returnBlock(value);
+            return nil;
+        } else {
+            //百思不得姐
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+            
+            [dateFormatter setDateFormat:@"yyyyMMddHHmmss"];
+            NSString *timeString = [dateFormatter stringFromDate:[NSDate date]];
+            
+            NSString *urlStr = @"http://route.showapi.com/255-1";
+            
+            NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                        @"22249", @"showapi_appid",
+                                        @"41",@"type",
+                                        timeString,@"showapi_timestamp",
+                                        [NSNumber numberWithInteger:page],@"page",nil];
+            
+            NSString *signString=[CATCommon signWithParmString:dic];
+            [dic setObject:signString forKey:@"showapi_sign"];
+            [dic setObject:@"" forKey:@"title"];
+            
+            return [AFNetworkClient netRequestGetWithUrl:urlStr withParameter:dic withBlock:^(id data, FinishRequestType finishType, NSError *error) {
+                [self deallWithReturnData:data withFinishType:finishType withError:error withBlock:returnBlock];
+            }];
+        }
     }
 }
 
@@ -86,26 +99,39 @@
         } else {
             page++;
         }
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        
-        [dateFormatter setDateFormat:@"yyyyMMddHHmmss"];
-        NSString *timeString = [dateFormatter stringFromDate:[NSDate date]];
-        
-        NSString *urlStr = @"http://route.showapi.com/255-1";
-        
-        NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                    @"22249", @"showapi_appid",
-                                    @"41",@"type",
-                                    timeString,@"showapi_timestamp",
-                                    [NSNumber numberWithInteger:page],@"page",nil];
-        
-        NSString *signString=[CATCommon signWithParmString:dic];
-        [dic setObject:signString forKey:@"showapi_sign"];
-        [dic setObject:@"" forKey:@"title"];
-        
-        return [AFNetworkClient netRequestGetWithUrl:urlStr withParameter:dic withBlock:^(id data, FinishRequestType finishType, NSError *error) {
-            [self deallWithReturnData:data withFinishType:finishType withError:error withBlock:returnBlock];
-        }];
+        if (_isFavType) {
+            NetReturnValue *value = [[NetReturnValue alloc] init];
+            value.finishType = REQUEST_SUCESS;
+            value.error = nil;
+            value.data = [VideoViewModel fetchFavListWithPage:page withSize:PageSize];
+            if (value.data == nil
+                || ([value.data isKindOfClass:[NSArray class]] && ((NSArray *)value.data).count < PageSize)) {
+                value.finishType = REQUEST_NO_MORE_DATA;
+            }
+            returnBlock(value);
+            return nil;
+        } else {
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+            
+            [dateFormatter setDateFormat:@"yyyyMMddHHmmss"];
+            NSString *timeString = [dateFormatter stringFromDate:[NSDate date]];
+            
+            NSString *urlStr = @"http://route.showapi.com/255-1";
+            
+            NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                        @"22249", @"showapi_appid",
+                                        @"41",@"type",
+                                        timeString,@"showapi_timestamp",
+                                        [NSNumber numberWithInteger:page],@"page",nil];
+            
+            NSString *signString=[CATCommon signWithParmString:dic];
+            [dic setObject:signString forKey:@"showapi_sign"];
+            [dic setObject:@"" forKey:@"title"];
+            
+            return [AFNetworkClient netRequestGetWithUrl:urlStr withParameter:dic withBlock:^(id data, FinishRequestType finishType, NSError *error) {
+                [self deallWithReturnData:data withFinishType:finishType withError:error withBlock:returnBlock];
+            }];
+        }
     }
 }
 

@@ -60,6 +60,8 @@
     self.zh_showCustomNav = NO;
     viewModel = [[VideoViewModel alloc] init];
     viewModel.isRandom = isRandom;
+    viewModel.isFavType = isFavType;
+    
     UIButton *leftBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 20, 44, 44)];
     leftBtn.backgroundColor = [UIColor clearColor];
     [leftBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -109,15 +111,9 @@
 {
     [myTableView.footer resetNoMoreData];
     __weak typeof(self) weakSelf = self;
-
-    if (isFavType) {
-        [weakSelf dealFavRefreshWithValue:[VideoViewModel fetchFavListWithPage:1 withSize:25]];
-    } else {
-        [viewModel fetchVideoList:^(NetReturnValue *returnValue) {
-            [weakSelf deallRefreshWithValue:returnValue];
-        }];
-    }
-    
+    [viewModel fetchVideoList:^(NetReturnValue *returnValue) {
+        [weakSelf deallRefreshWithValue:returnValue];
+    }];
 }
 
 -(void)dealFavRefreshWithValue:(NSArray *)data
@@ -185,14 +181,9 @@
 -(void)mjLoadMore
 {
     __weak typeof(self) weakSelf = self;
-    if (isFavType) {
-        [weakSelf dealFavLoadMoreWithValue: [VideoViewModel fetchFavListWithPage:1+dataArray.count/25 withSize:25]];
-    } else {
-        [viewModel fetchNextVideoList:^(NetReturnValue *returnValue) {
-            [weakSelf deallLoadModeWithValue:returnValue];
-        }];
-    }
-         
+    [viewModel fetchNextVideoList:^(NetReturnValue *returnValue) {
+        [weakSelf deallLoadModeWithValue:returnValue];
+    }];
 }
 
 -(void)dealFavLoadMoreWithValue:(NSArray *)data
