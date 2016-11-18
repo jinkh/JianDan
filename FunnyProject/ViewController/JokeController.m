@@ -89,6 +89,21 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(restTablePositionForJokeDetailController:) name:Rest_Table_Position_Joke_Notify object:nil];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(favDataChanged:) name:Joke_Fav_Data_Change_Notify object:nil];
+    
+}
+
+-(void)favDataChanged:(NSNotification *)notify
+{
+    if (isFavType) {
+        id object = notify.object;
+        if ([dataArray containsObject:object]) {
+            [dataArray removeObject:object];
+        } else {
+            [dataArray insertObject:object atIndex:0];
+        }
+        [myTableView reloadData];
+    }
 }
 
 -(void)restTablePositionForJokeDetailController:(NSNotification *)notify

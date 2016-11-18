@@ -92,13 +92,13 @@
     [super viewDidLoad];
 }
 
--(void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    for (UIViewController *controller in contentArray) {
-        [NSInvocation doInstanceMethodTarget:controller selectorName:@"mjRefreshData" args:nil];
-    }
-}
+//-(void)viewDidAppear:(BOOL)animated
+//{
+//    [super viewDidAppear:animated];
+//    for (UIViewController *controller in contentArray) {
+//        [NSInvocation doInstanceMethodTarget:controller selectorName:@"mjRefreshData" args:nil];
+//    }
+//}
 
 -(UIView *)contentViewForPagerAtIndex:(NSInteger)index
 {

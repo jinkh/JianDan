@@ -8,6 +8,8 @@
 
 #import "ViewBaseModel.h"
 
+#define Joke_Fav_Data_Change_Notify @"Joke_Fav_Data_Change_Notify"
+
 @interface JokeViewModel : ViewBaseModel
 
 -(NSURLSessionDataTask *)fetchJokeList:(ReturnBlock) returnBlock;

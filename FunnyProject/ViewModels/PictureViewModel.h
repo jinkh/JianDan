@@ -8,6 +8,8 @@
 
 #import <JSONModel/JSONModel.h>
 
+#define Picture_Fav_Data_Change_Notify @"Picture_Fav_Data_Change_Notify"
+
 @interface PictureViewModel : ViewBaseModel
 
 -(instancetype)initWithUrl:(NSString *)urlStr;

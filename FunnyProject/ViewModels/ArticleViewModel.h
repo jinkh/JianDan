@@ -9,6 +9,8 @@
 #import "ViewBaseModel.h"
 #import "ArticleModel.h"
 
+#define Article_Fav_Data_Change_Notify @"Article_Fav_Data_Change_Notify"
+
 @interface ArticleViewModel : ViewBaseModel
 
 -(NSURLSessionDataTask *)fetchNewArticleList:(ReturnBlock) returnBlock;

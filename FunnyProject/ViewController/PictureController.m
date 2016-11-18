@@ -94,6 +94,23 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(restTablePositionForPictureDetailController:) name:Rest_Table_Position_Pictures_Notify object:nil];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(favDataChanged:) name:Picture_Fav_Data_Change_Notify object:nil];
+    
+}
+
+-(void)favDataChanged:(NSNotification *)notify
+{
+    if (isFavType) {
+        PictureModel *object = notify.object;
+        if ([urlString isEqualToString:object.comment_type]) {
+            if ([dataArray containsObject:object]) {
+                [dataArray removeObject:object];
+            } else {
+                [dataArray insertObject:object atIndex:0];
+            }
+            [myTableView reloadData];
+        }
+    }
 }
 
 -(void)restTablePositionForPictureDetailController:(NSNotification *)notify

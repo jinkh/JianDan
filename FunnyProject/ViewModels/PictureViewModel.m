@@ -273,6 +273,9 @@
         id item = [class MR_createEntity];
         [self changeModel:item withModel:data];
         [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:Picture_Fav_Data_Change_Notify object:model];
+        });
     }
     
     if (block) {
@@ -295,6 +298,9 @@
         id item = array.firstObject;
         [item MR_deleteEntity];
         [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:Picture_Fav_Data_Change_Notify object:model];
+        });
     }
 }
 

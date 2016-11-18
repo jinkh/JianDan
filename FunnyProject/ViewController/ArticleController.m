@@ -95,6 +95,21 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(restTablePositionForArticleDetailController:) name:Rest_Table_Position_Article_Notify object:nil];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(favDataChanged:) name:Article_Fav_Data_Change_Notify object:nil];
+    
+}
+
+-(void)favDataChanged:(NSNotification *)notify
+{
+    if (isFavType) {
+        id object = notify.object;
+        if ([dataArray containsObject:object]) {
+            [dataArray removeObject:object];
+        } else {
+            [dataArray insertObject:object atIndex:0];
+        }
+        [myTableView reloadData];
+    }
 }
 
 -(void)restTablePositionForArticleDetailController:(NSNotification *)notify

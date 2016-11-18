@@ -250,6 +250,9 @@
         id item = [JokeModel_CoreData MR_createEntity];
         [self changeModel:item withModel:data];
         [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:Joke_Fav_Data_Change_Notify object:model];
+        });
     }
     
     if (block) {
@@ -265,6 +268,9 @@
         JokeModel_CoreData *item = array.firstObject;
         [item MR_deleteEntity];
         [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:Joke_Fav_Data_Change_Notify object:model];
+        });
     }
 }
 

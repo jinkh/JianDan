@@ -8,8 +8,9 @@
 
 #import "ViewBaseModel.h"
 
-@interface VideoViewModel : ViewBaseModel
+#define Video_Fav_Data_Change_Notify @"Video_Fav_Data_Change_Notify"
 
+@interface VideoViewModel : ViewBaseModel
 
 @property (assign, nonatomic) BOOL isRandom;
 
