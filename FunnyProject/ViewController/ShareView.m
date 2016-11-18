@@ -74,8 +74,8 @@
         self.backgroundColor = COLORA(0, 0, 0, .5);
         self.userInteractionEnabled = YES;
         
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismiss)];
-        [self addGestureRecognizer:tap];
+//        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismiss)];
+//        [self addGestureRecognizer:tap];
         
         bgView = [[UIView alloc] initWithFrame:CGRectZero];
         bgView.dk_backgroundColorPicker  = Cell_Bg;
@@ -556,6 +556,11 @@
         default:
             break;
     }
+}
+
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [self dismissAnimate:YES];
 }
 
 
