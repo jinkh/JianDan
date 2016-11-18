@@ -224,6 +224,7 @@
 -(void)pictureDetailWithData:(id)data withIndex:(NSInteger)index withType:(NSString *)typeUrl
 {
     PictureDetailController *detail = [[PictureDetailController alloc] initWithData:data withIndex:index withType:typeUrl];
+    detail.isFavType = self.isFavType;
     [TheAppDelegate.rootNavigationController pushViewController:detail animated:YES];
 }
 

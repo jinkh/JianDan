@@ -54,8 +54,15 @@
             _selectPageIndex = 0;
             [_scrollView setContentOffset:CGPointMake(0, 0)];
         }
+        self.pageEnabled = YES;
     }
     return self;
+}
+
+-(void)setPageEnabled:(BOOL)pageEnabled
+{
+    _pageEnabled = pageEnabled;
+    _scrollView.scrollEnabled = _pageEnabled;
 }
 -(void)reloadData
 {
@@ -150,7 +157,8 @@
         if (nowPage >_selectPageIndex) {
             if (self.delegate && [self.delegate respondsToSelector:@selector(dataCountForPage)]) {
                 NSInteger count = [self.delegate dataCountForPage];
-                if (count-1 == _selectDataIndex) {
+                if (count-1 <= _selectDataIndex) {
+                    _selectDataIndex = count-1;
                     NSLog(@"最后一页，没有数据啦");
                     return;
                 }

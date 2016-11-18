@@ -38,6 +38,8 @@
 
 @property (weak, nonatomic) id<ZHPagerLongViewDelegate>delegate;
 
+@property (assign, nonatomic) BOOL pageEnabled;
+
 -(void)reloadData;
 
 @end

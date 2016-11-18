@@ -48,7 +48,9 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.navigationController.zh_fullscreenPopWidth = 60;
+    if (pagerView.pageEnabled == YES) {
+        self.navigationController.zh_fullscreenPopWidth = 60;
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -75,6 +77,10 @@
     [self.view addSubview:toolBarView];
     ArticleModel *model = [myData objectAtIndex:origSelectIndex];
     [toolBarView resetFavSate:[ArticleViewModel isFavWithModel:model]];
+    
+    if (_isFavType) {
+        pagerView.pageEnabled = NO;
+    }
 }
 
 //ZHPagerLongViewDelegate

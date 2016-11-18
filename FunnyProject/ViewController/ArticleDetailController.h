@@ -13,6 +13,8 @@
 
 @interface ArticleDetailController : UIViewController
 
+@property (assign, nonatomic) BOOL isFavType;
+
 -(instancetype)initWithData:(NSArray *)data withIndex:(NSInteger)index;
 
 @end

@@ -13,6 +13,8 @@
 
 @interface PictureDetailController : UIViewController
 
+@property (assign, nonatomic) BOOL isFavType;
+
 -(instancetype)initWithData:(id)data withIndex:(NSInteger)index withType:(NSString *)typeUrl;
 
 @end

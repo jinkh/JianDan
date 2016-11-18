@@ -215,6 +215,7 @@
 -(void)jokeDetailWithData:(id)data withIndex:(NSInteger)index
 {
     JokeDetailController *detail = [[JokeDetailController alloc] initWithData:data withIndex:index];
+    detail.isFavType = self.isFavType;
     [TheAppDelegate.rootNavigationController pushViewController:detail animated:YES];
 }
 

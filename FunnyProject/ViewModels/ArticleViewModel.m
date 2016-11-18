@@ -149,6 +149,7 @@
 -(void)articleDetailWithData:(id)data withIndex:(NSInteger)index
 {
     ArticleDetailController *detail = [[ArticleDetailController alloc] initWithData:data withIndex:index];
+    detail.isFavType = self.isFavType;
     [TheAppDelegate.rootNavigationController pushViewController:detail animated:YES];
 }
 
