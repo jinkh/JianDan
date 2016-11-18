@@ -21,7 +21,7 @@
 
 @property (assign, nonatomic) BOOL isRandom;
 @property (assign, nonatomic) BOOL isFavType;
-
+@property (assign, nonatomic) NSInteger favOffset;
 
 //MagicRecord
 +(BOOL)isFavWithModel:(id)model;
@@ -30,7 +30,7 @@
 
 +(void)saveFavWithModel:(id)model withBlock:(void(^)(BOOL result)) block;
 
-+(NSArray*)fetchFavListWithPage:(NSInteger)page withSize:(NSInteger)size;
++(NSArray*)fetchFavListWithOffset:(NSInteger)offset withSize:(NSInteger)size;
 
 
 +(BOOL)isReadWithModel:(id)model;

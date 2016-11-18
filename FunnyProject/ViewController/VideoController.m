@@ -113,6 +113,7 @@
         } else {
             [dataArray insertObject:object atIndex:0];
         }
+        viewModel.favOffset = dataArray.count;
         [myTableView reloadData];
     }
 }
@@ -164,17 +165,17 @@
     if (returnValue.finishType == REQUEST_SUCESS) {
         [dataArray removeAllObjects];
         [dataArray addObjectsFromArray:returnValue.data];
+        [myTableView reloadData];
         [myTableView.header endRefreshing];
     } else if (returnValue.finishType == REQUEST_NO_MORE_DATA) {
         [dataArray removeAllObjects];
         [dataArray addObjectsFromArray:returnValue.data];
-        
+        [myTableView reloadData];
         [myTableView.footer endRefreshingWithNoMoreData];
         [myTableView.header endRefreshing];
     } else {
         [myTableView.header endRefreshing];
     }
-    [myTableView reloadData];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.11 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [[NSNotificationCenter defaultCenter] postNotificationName:ZHScrollToTopNotification object:nil];
     });

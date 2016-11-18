@@ -16,6 +16,8 @@
 
 @property (assign, nonatomic) BOOL isFavType;
 
+@property (assign, nonatomic) NSInteger favOffset;
+
 -(NSURLSessionDataTask *)fetchVideoList:(ReturnBlock) returnBlock;
 
 -(NSURLSessionDataTask *)fetchNextVideoList:(ReturnBlock) returnBlock;
@@ -28,6 +30,6 @@
 
 +(void)saveFavWithModel:(id)model withBlock:(void(^)(BOOL result)) block;
 
-+(NSArray*)fetchFavListWithPage:(NSInteger)page withSize:(NSInteger)size;
++(NSArray*)fetchFavListWithOffset:(NSInteger)offset withSize:(NSInteger)size;
 
 @end

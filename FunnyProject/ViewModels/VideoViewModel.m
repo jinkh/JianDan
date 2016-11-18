@@ -47,14 +47,16 @@
         }
         isNoMoreData = NO;
         if (_isFavType) {
+            _favOffset = 0;
             NetReturnValue *value = [[NetReturnValue alloc] init];
             value.finishType = REQUEST_SUCESS;
             value.error = nil;
-            value.data = [VideoViewModel fetchFavListWithPage:page withSize:PageSize];
+            value.data = [VideoViewModel fetchFavListWithOffset:_favOffset withSize:PageSize];
             if (value.data == nil
                 || ([value.data isKindOfClass:[NSArray class]] && ((NSArray *)value.data).count < PageSize)) {
                 value.finishType = REQUEST_NO_MORE_DATA;
             }
+            _favOffset += ((NSArray *)value.data).count;            
             returnBlock(value);
             return nil;
         } else {
@@ -103,11 +105,12 @@
             NetReturnValue *value = [[NetReturnValue alloc] init];
             value.finishType = REQUEST_SUCESS;
             value.error = nil;
-            value.data = [VideoViewModel fetchFavListWithPage:page withSize:PageSize];
+            value.data = [VideoViewModel fetchFavListWithOffset:_favOffset withSize:PageSize];
             if (value.data == nil
                 || ([value.data isKindOfClass:[NSArray class]] && ((NSArray *)value.data).count < PageSize)) {
                 value.finishType = REQUEST_NO_MORE_DATA;
             }
+            _favOffset += ((NSArray *)value.data).count;
             returnBlock(value);
             return nil;
         } else {
@@ -181,7 +184,7 @@
 
 //MagicRecord
 
-+(NSArray*)fetchFavListWithPage:(NSInteger)page withSize:(NSInteger)size
++(NSArray*)fetchFavListWithOffset:(NSInteger)offset withSize:(NSInteger)size
 {
 
     NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"VideoModel_CoreData"];
@@ -191,7 +194,7 @@
     [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sort]];
     
     [fetchRequest   setFetchLimit:size];
-    [fetchRequest   setFetchOffset:(page-1) * size];
+    [fetchRequest   setFetchOffset:offset];
 
     NSArray *result =[VideoModel_CoreData MR_executeFetchRequest:fetchRequest inContext:[NSManagedObjectContext MR_defaultContext]];
     NSMutableArray *returnValue = [[NSMutableArray alloc] init];

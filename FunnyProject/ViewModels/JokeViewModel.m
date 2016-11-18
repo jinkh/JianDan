@@ -48,14 +48,16 @@
         }
         isNoMoreData = NO;
         if (_isFavType) {
+            _favOffset = 0;
             NetReturnValue *value = [[NetReturnValue alloc] init];
             value.finishType = REQUEST_SUCESS;
             value.error = nil;
-            value.data = [JokeViewModel fetchFavListWithPage:page withSize:PageSize];
+            value.data = [JokeViewModel fetchFavListWithOffset:_favOffset withSize:PageSize];
             if (value.data == nil
                 || ([value.data isKindOfClass:[NSArray class]] && ((NSArray *)value.data).count < PageSize)) {
                 value.finishType = REQUEST_NO_MORE_DATA;
             }
+            _favOffset += ((NSArray *)value.data).count;
             returnBlock(value);
             return nil;
         } else {
@@ -87,11 +89,12 @@
             NetReturnValue *value = [[NetReturnValue alloc] init];
             value.finishType = REQUEST_SUCESS;
             value.error = nil;
-            value.data = [JokeViewModel fetchFavListWithPage:page withSize:PageSize];
+            value.data = [JokeViewModel fetchFavListWithOffset:_favOffset withSize:PageSize];
             if (value.data == nil
                 || ([value.data isKindOfClass:[NSArray class]] && ((NSArray *)value.data).count < PageSize)) {
                 value.finishType = REQUEST_NO_MORE_DATA;
             }
+            _favOffset += ((NSArray *)value.data).count;
             returnBlock(value);
             return nil;
         } else {
@@ -219,14 +222,14 @@
 
 //MagicRecord
 
-+(NSArray*)fetchFavListWithPage:(NSInteger)page withSize:(NSInteger)size
++(NSArray*)fetchFavListWithOffset:(NSInteger)offset withSize:(NSInteger)size
 {
     NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"JokeModel_CoreData"];
     NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"sortTime" ascending:NO];
     [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sort]];
     
-    [fetchRequest setFetchLimit:size];
-    [fetchRequest setFetchOffset:(page-1) * size];
+    [fetchRequest  setFetchLimit:size];
+    [fetchRequest  setFetchOffset:offset];
     
     
     

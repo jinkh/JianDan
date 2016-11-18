@@ -55,14 +55,16 @@
         }
         isNoMoreData = NO;
         if (_isFavType) {
+            _favOffset = 0;
             NetReturnValue *value = [[NetReturnValue alloc] init];
             value.finishType = REQUEST_SUCESS;
             value.error = nil;
-            value.data = [PictureViewModel fetchFavListWithPage:page withSize:PageSize withType:urlString];
+            value.data = [PictureViewModel fetchFavListWithOffset:_favOffset withSize:PageSize withType:urlString];
             if (value.data == nil
                 || ([value.data isKindOfClass:[NSArray class]] && ((NSArray *)value.data).count < PageSize)) {
                 value.finishType = REQUEST_NO_MORE_DATA;
             }
+            _favOffset += ((NSArray *)value.data).count;            
             returnBlock(value);
             return nil;
         } else {
@@ -93,11 +95,12 @@
             NetReturnValue *value = [[NetReturnValue alloc] init];
             value.finishType = REQUEST_SUCESS;
             value.error = nil;
-            value.data = [PictureViewModel fetchFavListWithPage:page withSize:PageSize withType:urlString];
+            value.data = [PictureViewModel fetchFavListWithOffset:_favOffset withSize:PageSize withType:urlString];
             if (value.data == nil
                 || ([value.data isKindOfClass:[NSArray class]] && ((NSArray *)value.data).count < PageSize)) {
                 value.finishType = REQUEST_NO_MORE_DATA;
             }
+            _favOffset += ((NSArray *)value.data).count;
             returnBlock(value);
             return nil;
         } else {
@@ -227,7 +230,7 @@
 
 //MagicRecord
 
-+(NSArray*)fetchFavListWithPage:(NSInteger)page withSize:(NSInteger)size withType:(NSString *)type
++(NSArray*)fetchFavListWithOffset:(NSInteger)offset withSize:(NSInteger)size withType:(NSString *)type
 {
     Class class = nil;
     if ([type isEqualToString:BoredPicturesUrl]) {
@@ -243,7 +246,7 @@
     [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sort]];
     
     [fetchRequest   setFetchLimit:size];
-    [fetchRequest   setFetchOffset:(page-1) * size];
+    [fetchRequest   setFetchOffset:offset];
     
     NSArray *result =[class MR_executeFetchRequest:fetchRequest inContext:[NSManagedObjectContext MR_defaultContext]];
     NSMutableArray *returnValue = [[NSMutableArray alloc] init];

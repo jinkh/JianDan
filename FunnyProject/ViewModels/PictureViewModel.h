@@ -22,11 +22,12 @@
 
 @property (assign, nonatomic) BOOL isRandom;
 @property (assign, nonatomic) BOOL isFavType;
+@property (assign, nonatomic) NSInteger favOffset;
 
 
 //special
 
-+(NSArray*)fetchFavListWithPage:(NSInteger)page withSize:(NSInteger)size withType:(NSString *)type;
++(NSArray*)fetchFavListWithOffset:(NSInteger)offset withSize:(NSInteger)size withType:(NSString *)type;
 
 +(void)saveFavWithModel:(id)model withBlock:(void(^)(BOOL result))block withType:(NSString *)type;
 
