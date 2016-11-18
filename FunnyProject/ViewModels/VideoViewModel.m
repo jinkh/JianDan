@@ -56,7 +56,7 @@
                 || ([value.data isKindOfClass:[NSArray class]] && ((NSArray *)value.data).count < PageSize)) {
                 value.finishType = REQUEST_NO_MORE_DATA;
             }
-            _favOffset += ((NSArray *)value.data).count;            
+            _favOffset += ((NSArray *)value.data).count;
             returnBlock(value);
             return nil;
         } else {
@@ -186,65 +186,73 @@
 
 +(NSArray*)fetchFavListWithOffset:(NSInteger)offset withSize:(NSInteger)size
 {
-
-    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"VideoModel_CoreData"];
-    
-    
-    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"sortTime" ascending:NO];
-    [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sort]];
-    
-    [fetchRequest   setFetchLimit:size];
-    [fetchRequest   setFetchOffset:offset];
-
-    NSArray *result =[VideoModel_CoreData MR_executeFetchRequest:fetchRequest inContext:[NSManagedObjectContext MR_defaultContext]];
-    NSMutableArray *returnValue = [[NSMutableArray alloc] init];
-    for (NSInteger i = 0; i < result.count; i++) {
-        VideoModel_CoreData *item = [result objectAtIndex:i];
-        VideoModel *model = [[VideoModel alloc] init];
-        [self changeModel:model withModel:item];
-        [returnValue addObject:model];
+    @synchronized ([VideoViewModel class]) {
+        
+        NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"VideoModel_CoreData"];
+        
+        
+        NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"sortTime" ascending:NO];
+        [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sort]];
+        
+        [fetchRequest   setFetchLimit:size];
+        [fetchRequest   setFetchOffset:offset];
+        
+        NSArray *result =[VideoModel_CoreData MR_executeFetchRequest:fetchRequest inContext:[NSManagedObjectContext MR_defaultContext]];
+        NSMutableArray *returnValue = [[NSMutableArray alloc] init];
+        for (NSInteger i = 0; i < result.count; i++) {
+            VideoModel_CoreData *item = [result objectAtIndex:i];
+            VideoModel *model = [[VideoModel alloc] init];
+            [self changeModel:model withModel:item];
+            [returnValue addObject:model];
+        }
+        return returnValue;
     }
-    return returnValue;
 }
 
 +(BOOL)saveFavWithModel:(id)model;
 {
-    VideoModel *data = model;
-
-    NSArray *array = [VideoModel_CoreData MR_findByAttribute:@"id" withValue:data.id];
-    if (array == nil ||  array.count <= 0) {
-        id item = [VideoModel_CoreData MR_createEntity];
-        [self changeModel:item withModel:data];
-        [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [[NSNotificationCenter defaultCenter] postNotificationName:Video_Fav_Data_Change_Notify object:model];
-        });
+    @synchronized ([VideoViewModel class]) {
+        VideoModel *data = model;
+        
+        NSArray *array = [VideoModel_CoreData MR_findByAttribute:@"id" withValue:data.id];
+        if (array == nil ||  array.count <= 0) {
+            id item = [VideoModel_CoreData MR_createEntity];
+            [self changeModel:item withModel:data];
+            [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [[NSNotificationCenter defaultCenter] postNotificationName:Video_Fav_Data_Change_Notify object:model];
+            });
+        }
+        return YES;
     }
-    return YES;
 }
 
 +(void)deleteFavWithModel:(id)model
 {
-    VideoModel *data = model;
-    NSArray *array = [VideoModel_CoreData MR_findByAttribute:@"id" withValue:data.id];
-    if (array && array.count > 0) {
-        VideoModel_CoreData *item = array.firstObject;
-        [item MR_deleteEntity];
-        [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [[NSNotificationCenter defaultCenter] postNotificationName:Video_Fav_Data_Change_Notify object:model];
-        });
+    @synchronized ([VideoViewModel class]) {
+        VideoModel *data = model;
+        NSArray *array = [VideoModel_CoreData MR_findByAttribute:@"id" withValue:data.id];
+        if (array && array.count > 0) {
+            VideoModel_CoreData *item = array.firstObject;
+            [item MR_deleteEntity];
+            [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [[NSNotificationCenter defaultCenter] postNotificationName:Video_Fav_Data_Change_Notify object:model];
+            });
+        }
     }
 }
 
 +(BOOL)isFavWithModel:(id)model
 {
-    VideoModel *data = model;
-    NSArray *array = [VideoModel_CoreData MR_findByAttribute:@"id" withValue:data.id];
-    if (array && array.count > 0) {
-        return YES;
+    @synchronized ([VideoViewModel class]) {
+        VideoModel *data = model;
+        NSArray *array = [VideoModel_CoreData MR_findByAttribute:@"id" withValue:data.id];
+        if (array && array.count > 0) {
+            return YES;
+        }
+        return NO;
     }
-    return NO;
 }
 
 

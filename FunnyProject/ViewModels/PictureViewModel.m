@@ -64,7 +64,7 @@
                 || ([value.data isKindOfClass:[NSArray class]] && ((NSArray *)value.data).count < PageSize)) {
                 value.finishType = REQUEST_NO_MORE_DATA;
             }
-            _favOffset += ((NSArray *)value.data).count;            
+            _favOffset += ((NSArray *)value.data).count;
             returnBlock(value);
             return nil;
         } else {
@@ -233,92 +233,100 @@
 
 +(NSArray*)fetchFavListWithOffset:(NSInteger)offset withSize:(NSInteger)size withType:(NSString *)type
 {
-    Class class = nil;
-    if ([type isEqualToString:BoredPicturesUrl]) {
-        class = NSClassFromString(@"BoardPictureModel_CoreData");
-    } else {
-        class = NSClassFromString(@"SisterPictureModel_CoreData");
+    @synchronized ([PictureViewModel class]) {
+        Class class = nil;
+        if ([type isEqualToString:BoredPicturesUrl]) {
+            class = NSClassFromString(@"BoardPictureModel_CoreData");
+        } else {
+            class = NSClassFromString(@"SisterPictureModel_CoreData");
+        }
+        
+        NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:NSStringFromClass(class)];
+        
+        
+        NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"sortTime" ascending:NO];
+        [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sort]];
+        
+        [fetchRequest   setFetchLimit:size];
+        [fetchRequest   setFetchOffset:offset];
+        
+        NSArray *result =[class MR_executeFetchRequest:fetchRequest inContext:[NSManagedObjectContext MR_defaultContext]];
+        NSMutableArray *returnValue = [[NSMutableArray alloc] init];
+        for (NSInteger i = 0; i < result.count; i++) {
+            id item = [result objectAtIndex:i];
+            PictureModel *model = [[PictureModel alloc] init];
+            [self changeModel:model withModel:item];
+            [returnValue addObject:model];
+        }
+        return returnValue;
     }
-    
-    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:NSStringFromClass(class)];
-    
-    
-    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"sortTime" ascending:NO];
-    [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sort]];
-    
-    [fetchRequest   setFetchLimit:size];
-    [fetchRequest   setFetchOffset:offset];
-    
-    NSArray *result =[class MR_executeFetchRequest:fetchRequest inContext:[NSManagedObjectContext MR_defaultContext]];
-    NSMutableArray *returnValue = [[NSMutableArray alloc] init];
-    for (NSInteger i = 0; i < result.count; i++) {
-        id item = [result objectAtIndex:i];
-        PictureModel *model = [[PictureModel alloc] init];
-        [self changeModel:model withModel:item];
-        [returnValue addObject:model];
-    }
-    return returnValue;
 }
 
 
 +(BOOL)saveFavWithModel:(id)model withType:(NSString *)type
 {
-    Class class = nil;
-    if ([type isEqualToString:BoredPicturesUrl]) {
-        class = NSClassFromString(@"BoardPictureModel_CoreData");
-    } else {
-        class = NSClassFromString(@"SisterPictureModel_CoreData");
+    @synchronized ([PictureViewModel class]) {
+        Class class = nil;
+        if ([type isEqualToString:BoredPicturesUrl]) {
+            class = NSClassFromString(@"BoardPictureModel_CoreData");
+        } else {
+            class = NSClassFromString(@"SisterPictureModel_CoreData");
+        }
+        
+        PictureModel *data = model;
+        
+        NSArray *array = [class MR_findByAttribute:@"comment_ID" withValue:data.comment_ID];
+        if (array == nil ||  array.count <= 0) {
+            id item = [class MR_createEntity];
+            [self changeModel:item withModel:data];
+            [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [[NSNotificationCenter defaultCenter] postNotificationName:Picture_Fav_Data_Change_Notify object:model];
+            });
+        }
+        return YES;
     }
-    
-    PictureModel *data = model;
-
-    NSArray *array = [class MR_findByAttribute:@"comment_ID" withValue:data.comment_ID];
-    if (array == nil ||  array.count <= 0) {
-        id item = [class MR_createEntity];
-        [self changeModel:item withModel:data];
-        [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [[NSNotificationCenter defaultCenter] postNotificationName:Picture_Fav_Data_Change_Notify object:model];
-        });
-    }
-    return YES;
 }
 
 +(void)deleteFavWithModel:(id)model withType:(NSString *)type
 {
-    Class class = nil;
-    if ([type isEqualToString:BoredPicturesUrl]) {
-        class = NSClassFromString(@"BoardPictureModel_CoreData");
-    } else {
-        class = NSClassFromString(@"SisterPictureModel_CoreData");
-    }
-    
-    PictureModel *data = model;
-    NSArray *array = [class MR_findByAttribute:@"comment_ID" withValue:data.comment_ID];
-    if (array && array.count > 0) {
-        id item = array.firstObject;
-        [item MR_deleteEntity];
-        [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [[NSNotificationCenter defaultCenter] postNotificationName:Picture_Fav_Data_Change_Notify object:model];
-        });
+    @synchronized ([PictureViewModel class]) {
+        Class class = nil;
+        if ([type isEqualToString:BoredPicturesUrl]) {
+            class = NSClassFromString(@"BoardPictureModel_CoreData");
+        } else {
+            class = NSClassFromString(@"SisterPictureModel_CoreData");
+        }
+        
+        PictureModel *data = model;
+        NSArray *array = [class MR_findByAttribute:@"comment_ID" withValue:data.comment_ID];
+        if (array && array.count > 0) {
+            id item = array.firstObject;
+            [item MR_deleteEntity];
+            [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [[NSNotificationCenter defaultCenter] postNotificationName:Picture_Fav_Data_Change_Notify object:model];
+            });
+        }
     }
 }
 
 +(BOOL)isFavWithModel:(id)model withType:(NSString *)type
 {
-    Class class = nil;
-    if ([type isEqualToString:BoredPicturesUrl]) {
-        class = NSClassFromString(@"BoardPictureModel_CoreData");
-    } else {
-        class = NSClassFromString(@"SisterPictureModel_CoreData");
+    @synchronized ([PictureViewModel class]) {
+        Class class = nil;
+        if ([type isEqualToString:BoredPicturesUrl]) {
+            class = NSClassFromString(@"BoardPictureModel_CoreData");
+        } else {
+            class = NSClassFromString(@"SisterPictureModel_CoreData");
+        }
+        PictureModel *data = model;
+        NSArray *array = [class MR_findByAttribute:@"comment_ID" withValue:data.comment_ID];
+        if (array && array.count > 0) {
+            return YES;
+        }
+        return NO;
     }
-    PictureModel *data = model;
-    NSArray *array = [class MR_findByAttribute:@"comment_ID" withValue:data.comment_ID];
-    if (array && array.count > 0) {
-        return YES;
-    }
-    return NO;
 }
 
 @end

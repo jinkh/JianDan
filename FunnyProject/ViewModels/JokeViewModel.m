@@ -31,7 +31,7 @@
 -(instancetype)init
 {
     if (self = [super init]) {
-  
+        
         page = 1;
         isNoMoreData = NO;
     }
@@ -225,64 +225,73 @@
 
 +(NSArray*)fetchFavListWithOffset:(NSInteger)offset withSize:(NSInteger)size
 {
-    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"JokeModel_CoreData"];
-    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"sortTime" ascending:NO];
-    [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sort]];
-    
-    [fetchRequest  setFetchLimit:size];
-    [fetchRequest  setFetchOffset:offset];
-    
-    
-    
-    NSArray *result =[JokeModel_CoreData MR_executeFetchRequest:fetchRequest inContext:[NSManagedObjectContext MR_defaultContext]];
-    NSMutableArray *returnValue = [[NSMutableArray alloc] init];
-    for (NSInteger i = 0; i < result.count; i++) {
-        JokeModel_CoreData *item = [result objectAtIndex:i];
-        JokeModel *model = [[JokeModel alloc] init];
-        [self changeModel:model withModel:item];
-        [returnValue addObject:model];
+    @synchronized ([JokeViewModel class]) {
+        NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"JokeModel_CoreData"];
+        NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"sortTime" ascending:NO];
+        [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sort]];
+        
+        [fetchRequest  setFetchLimit:size];
+        [fetchRequest  setFetchOffset:offset];
+        
+        
+        
+        NSArray *result =[JokeModel_CoreData MR_executeFetchRequest:fetchRequest inContext:[NSManagedObjectContext MR_defaultContext]];
+        NSMutableArray *returnValue = [[NSMutableArray alloc] init];
+        for (NSInteger i = 0; i < result.count; i++) {
+            JokeModel_CoreData *item = [result objectAtIndex:i];
+            JokeModel *model = [[JokeModel alloc] init];
+            [self changeModel:model withModel:item];
+            [returnValue addObject:model];
+        }
+        return returnValue;
     }
-    return returnValue;
+    
 }
 
 +(BOOL)saveFavWithModel:(id)model
 {
-    JokeModel *data = model;
-
-    NSArray *array = [JokeModel_CoreData MR_findByAttribute:@"comment_ID" withValue:data.comment_ID];
-    if (array == nil ||  array.count <= 0) {
-        id item = [JokeModel_CoreData MR_createEntity];
-        [self changeModel:item withModel:data];
-        [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [[NSNotificationCenter defaultCenter] postNotificationName:Joke_Fav_Data_Change_Notify object:model];
-        });
+    @synchronized ([JokeViewModel class]) {
+        JokeModel *data = model;
+        
+        NSArray *array = [JokeModel_CoreData MR_findByAttribute:@"comment_ID" withValue:data.comment_ID];
+        if (array == nil ||  array.count <= 0) {
+            id item = [JokeModel_CoreData MR_createEntity];
+            [self changeModel:item withModel:data];
+            [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [[NSNotificationCenter defaultCenter] postNotificationName:Joke_Fav_Data_Change_Notify object:model];
+            });
+        }
+        return YES;
     }
-    return YES;
 }
 
 +(void)deleteFavWithModel:(id)model
 {
-    JokeModel *data = model;
-    NSArray *array = [JokeModel_CoreData MR_findByAttribute:@"comment_ID" withValue:data.comment_ID];
-    if (array && array.count > 0) {
-        JokeModel_CoreData *item = array.firstObject;
-        [item MR_deleteEntity];
-        [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [[NSNotificationCenter defaultCenter] postNotificationName:Joke_Fav_Data_Change_Notify object:model];
-        });
+    @synchronized ([JokeViewModel class]) {
+        JokeModel *data = model;
+        NSArray *array = [JokeModel_CoreData MR_findByAttribute:@"comment_ID" withValue:data.comment_ID];
+        if (array && array.count > 0) {
+            JokeModel_CoreData *item = array.firstObject;
+            [item MR_deleteEntity];
+            [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [[NSNotificationCenter defaultCenter] postNotificationName:Joke_Fav_Data_Change_Notify object:model];
+            });
+        }
     }
 }
 
 +(BOOL)isFavWithModel:(id)model
 {
-    JokeModel *data = model;
-    NSArray *array = [JokeModel_CoreData MR_findByAttribute:@"comment_ID" withValue:data.comment_ID];
-    if (array && array.count > 0) {
-        return YES;
+    @synchronized ([JokeViewModel class]) {
+        JokeModel *data = model;
+        NSArray *array = [JokeModel_CoreData MR_findByAttribute:@"comment_ID" withValue:data.comment_ID];
+        if (array && array.count > 0) {
+            return YES;
+        }
+        return NO;
     }
-    return NO;
 }
 
 @end

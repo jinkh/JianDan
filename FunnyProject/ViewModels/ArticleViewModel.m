@@ -111,7 +111,7 @@
     NetReturnValue *value = [[NetReturnValue alloc] init];
     value.finishType = finishType;
     value.error = error;
-
+    
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         if (finishType != REQUEST_FAILED) {
@@ -136,14 +136,14 @@
                 }
             }
         }
- 
+        
         dispatch_async(dispatch_get_main_queue(), ^{
             if (returnBlock) {
-               returnBlock(value);
+                returnBlock(value);
             }
         });
     });
-
+    
 }
 
 -(void)articleDetailWithData:(id)data withIndex:(NSInteger)index
@@ -160,138 +160,156 @@
 
 +(NSArray*)fetchFavListWithOffset:(NSInteger)offset withSize:(NSInteger)size
 {
-    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"ArticleModel_CoreData"];
-
-    
-    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"sortTime" ascending:NO];
-    [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sort]];
-    
-    [fetchRequest   setFetchLimit:size];
-    [fetchRequest   setFetchOffset:offset];
-    
-    NSArray *result =[ArticleModel_CoreData MR_executeFetchRequest:fetchRequest inContext:[NSManagedObjectContext MR_defaultContext]];
-    NSMutableArray *returnValue = [[NSMutableArray alloc] init];
-    for (NSInteger i = 0; i < result.count; i++) {
-        ArticleModel_CoreData *item = [result objectAtIndex:i];
-        ArticleModel *model = [[ArticleModel alloc] init];
-        [self changeModel:model withModel:item];
-        [returnValue addObject:model];
+    @synchronized ([ArticleViewModel class]) {
+        NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"ArticleModel_CoreData"];
+        
+        
+        NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"sortTime" ascending:NO];
+        [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sort]];
+        
+        [fetchRequest   setFetchLimit:size];
+        [fetchRequest   setFetchOffset:offset];
+        
+        NSArray *result =[ArticleModel_CoreData MR_executeFetchRequest:fetchRequest inContext:[NSManagedObjectContext MR_defaultContext]];
+        NSMutableArray *returnValue = [[NSMutableArray alloc] init];
+        for (NSInteger i = 0; i < result.count; i++) {
+            ArticleModel_CoreData *item = [result objectAtIndex:i];
+            ArticleModel *model = [[ArticleModel alloc] init];
+            [self changeModel:model withModel:item];
+            [returnValue addObject:model];
+        }
+        return returnValue;
     }
-    return returnValue;
 }
 
 +(BOOL)saveFavWithModel:(id)model
 {
-    ArticleModel *data = model;
-    
-    NSArray *array = [ArticleModel_CoreData MR_findByAttribute:@"id" withValue:data.id];
-    if (array == nil ||  array.count <= 0) {
-        id item = [ArticleModel_CoreData MR_createEntity];
-        [self changeModel:item withModel:data];
-        [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [[NSNotificationCenter defaultCenter] postNotificationName:Article_Fav_Data_Change_Notify object:model];
-        });
+    @synchronized ([ArticleViewModel class]) {
+        ArticleModel *data = model;
+        
+        NSArray *array = [ArticleModel_CoreData MR_findByAttribute:@"id" withValue:data.id];
+        if (array == nil ||  array.count <= 0) {
+            id item = [ArticleModel_CoreData MR_createEntity];
+            [self changeModel:item withModel:data];
+            [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [[NSNotificationCenter defaultCenter] postNotificationName:Article_Fav_Data_Change_Notify object:model];
+            });
+        }
+        return YES;
     }
-    return YES;
 }
 
 +(void)deleteFavWithModel:(id)model
 {
-    ArticleModel *data = model;
-    NSArray *array = [ArticleModel_CoreData MR_findByAttribute:@"id" withValue:data.id];
-    if (array && array.count > 0) {
-        ArticleModel_CoreData *item = array.firstObject;
-        [item MR_deleteEntity];
-        [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [[NSNotificationCenter defaultCenter] postNotificationName:Article_Fav_Data_Change_Notify object:model];
-        });
+    @synchronized ([ArticleViewModel class]) {
+        ArticleModel *data = model;
+        NSArray *array = [ArticleModel_CoreData MR_findByAttribute:@"id" withValue:data.id];
+        if (array && array.count > 0) {
+            ArticleModel_CoreData *item = array.firstObject;
+            [item MR_deleteEntity];
+            [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [[NSNotificationCenter defaultCenter] postNotificationName:Article_Fav_Data_Change_Notify object:model];
+            });
+        }
     }
 }
 
 +(BOOL)isFavWithModel:(id)model
 {
-    ArticleModel *data = model;
-    NSArray *array = [ArticleModel_CoreData MR_findByAttribute:@"id" withValue:data.id];
-    if (array && array.count > 0) {
-        return YES;
+    @synchronized ([ArticleViewModel class]) {
+        ArticleModel *data = model;
+        NSArray *array = [ArticleModel_CoreData MR_findByAttribute:@"id" withValue:data.id];
+        if (array && array.count > 0) {
+            return YES;
+        }
+        return NO;
     }
-    return NO;
 }
 
 
 +(NSArray*)fetchReadListWithPage:(NSInteger)page withSize:(NSInteger)size
 {
-    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"ArticleModel_CoreData"];
-    
-    
-    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"sortTime" ascending:NO];
-    [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sort]];
-    
-    [fetchRequest   setFetchLimit:size];
-    [fetchRequest   setFetchOffset:(page-1) * size];
-    
-    NSArray *result =[ArticleModel_Read_CoreData MR_executeFetchRequest:fetchRequest inContext:[NSManagedObjectContext MR_defaultContext]];
-    NSMutableArray *returnValue = [[NSMutableArray alloc] init];
-    for (NSInteger i = 0; i < result.count; i++) {
-        ArticleModel_Read_CoreData *item = [result objectAtIndex:i];
-        ArticleModel *model = [[ArticleModel alloc] init];
-        [self changeModel:model withModel:item];
-        [returnValue addObject:model];
+    @synchronized ([ArticleViewModel class]) {
+        NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"ArticleModel_CoreData"];
+        
+        
+        NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"sortTime" ascending:NO];
+        [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sort]];
+        
+        [fetchRequest   setFetchLimit:size];
+        [fetchRequest   setFetchOffset:(page-1) * size];
+        
+        NSArray *result =[ArticleModel_Read_CoreData MR_executeFetchRequest:fetchRequest inContext:[NSManagedObjectContext MR_defaultContext]];
+        NSMutableArray *returnValue = [[NSMutableArray alloc] init];
+        for (NSInteger i = 0; i < result.count; i++) {
+            ArticleModel_Read_CoreData *item = [result objectAtIndex:i];
+            ArticleModel *model = [[ArticleModel alloc] init];
+            [self changeModel:model withModel:item];
+            [returnValue addObject:model];
+        }
+        return returnValue;
     }
-    return returnValue;
 }
 
 +(void)saveReadWithModel:(id)model withBlock:(void(^)(BOOL result)) block
 {
-    ArticleModel *data = model;
-    
-    NSArray *array = [ArticleModel_Read_CoreData MR_findByAttribute:@"id" withValue:data.id];
-    if (array == nil ||  array.count <= 0) {
-        id item = [ArticleModel_Read_CoreData MR_createEntity];
-        [self changeModel:item withModel:data];
-        [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
-    }
-    
-    if (block) {
-        block(YES);
+    @synchronized ([ArticleViewModel class]) {
+        ArticleModel *data = model;
+        
+        NSArray *array = [ArticleModel_Read_CoreData MR_findByAttribute:@"id" withValue:data.id];
+        if (array == nil ||  array.count <= 0) {
+            id item = [ArticleModel_Read_CoreData MR_createEntity];
+            [self changeModel:item withModel:data];
+            [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
+        }
+        
+        if (block) {
+            block(YES);
+        }
     }
 }
 
 +(void)deleteReadWithModel:(id)model
 {
-    ArticleModel *data = model;
-    NSArray *array = [ArticleModel_Read_CoreData MR_findByAttribute:@"id" withValue:data.id];
-    if (array && array.count > 0) {
-        ArticleModel_Read_CoreData *item = array.firstObject;
-        [item MR_deleteEntity];
-        [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
+    @synchronized ([ArticleViewModel class]) {
+        ArticleModel *data = model;
+        NSArray *array = [ArticleModel_Read_CoreData MR_findByAttribute:@"id" withValue:data.id];
+        if (array && array.count > 0) {
+            ArticleModel_Read_CoreData *item = array.firstObject;
+            [item MR_deleteEntity];
+            [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreAndWait];
+        }
     }
 }
 
 +(BOOL)isReadWithModel:(id)model
 {
-    ArticleModel *data = model;
-    NSArray *array = [ArticleModel_Read_CoreData MR_findByAttribute:@"id" withValue:data.id];
-    if (array && array.count > 0) {
-        return YES;
+    @synchronized ([ArticleViewModel class]) {
+        ArticleModel *data = model;
+        NSArray *array = [ArticleModel_Read_CoreData MR_findByAttribute:@"id" withValue:data.id];
+        if (array && array.count > 0) {
+            return YES;
+        }
+        return NO;
     }
-    return NO;
 }
 
 //后续应该全部切换到后台线程
 +(BOOL)isReadWithModelInBackGround:(id)model
 {
-    if ([NSThread currentThread].isMainThread) {
-        return [self isReadWithModel:model];
-    } else {
-        ArticleModel *data = model;
-        NSArray *array = [ArticleModel_Read_CoreData MR_findByAttribute:@"id" withValue:data.id inContext:[NSManagedObjectContext MR_context]];
-        if (array && array.count > 0) {
-            return YES;
+    @synchronized ([ArticleViewModel class]) {
+        if ([NSThread currentThread].isMainThread) {
+            return [self isReadWithModel:model];
+        } else {
+            ArticleModel *data = model;
+            NSArray *array = [ArticleModel_Read_CoreData MR_findByAttribute:@"id" withValue:data.id inContext:[NSManagedObjectContext MR_context]];
+            if (array && array.count > 0) {
+                return YES;
+            }
+            return NO;
         }
-        return NO;
     }
 }
 
