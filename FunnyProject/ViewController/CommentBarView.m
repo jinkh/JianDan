@@ -28,6 +28,8 @@
     
     id parentComment;
     
+    BOOL isFaving;
+    
 }
 @end
 
@@ -41,6 +43,7 @@
     [realBgBtn removeFromSuperview];
     realBgBtn = nil;
     [[NSNotificationCenter defaultCenter]  removeObserver:self];
+    [NSObject cancelPreviousPerformRequestsWithTarget:self];
 }
 -(instancetype)initWithFrame:(CGRect)frame
 {
@@ -150,11 +153,21 @@
 
 -(void)resetFavSate:(BOOL)isFav
 {
+    if (isFaving) {
+        return;
+    }
     if (isFav) {
         [favBtn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
     } else {
         [favBtn setTitleColor:COLOR(119, 119, 119) forState:UIControlStateNormal];
     }
+    [self performSelector:@selector(resetFavBtnState) withObject:nil afterDelay:.5];
+    isFaving = YES;
+}
+
+-(void)resetFavBtnState
+{
+    isFaving = NO;
 }
 
 -(void)showKeyBoard
