@@ -132,6 +132,9 @@
         
         if (finishType != REQUEST_FAILED) {
             NSArray *list = [data getArrayValueForKey:@"comments" defaultValue:nil];
+            if (list.count <= 0) {
+                return nil;
+            }
             NSMutableArray *result = [PictureModel arrayOfModelsFromDictionaries:list error:nil];
             value.data = result;
             NSMutableString *param = [NSMutableString string];
