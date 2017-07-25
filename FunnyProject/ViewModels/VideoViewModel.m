@@ -140,8 +140,8 @@
 
 -(NSInteger)randomPage
 {
-    //随机取b不常见到的20-300页
-    NSInteger value = (arc4random() % 300) + 20;
+    //随机取b不常见到的20-100页
+    NSInteger value = (arc4random() % 100) + 20;
     NSLog(@"randomPage = %ld", value);
     return value;
 }
