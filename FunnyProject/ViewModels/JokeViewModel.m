@@ -115,7 +115,7 @@
 }
 
 
--(NSURLSessionDataTask *)deallWithReturnData:(id)data withFinishType:(FinishRequestType)finishType withError:(NSError *)error withBlock:(ReturnBlock) returnBlock
+-(void)deallWithReturnData:(id)data withFinishType:(FinishRequestType)finishType withError:(NSError *)error withBlock:(ReturnBlock) returnBlock
 {
     @synchronized(self) {
         NetReturnValue *value = [[NetReturnValue alloc] init];
@@ -127,87 +127,63 @@
             NSMutableArray *result = [JokeModel arrayOfModelsFromDictionaries:list error:nil];
             value.data = result;
             
-            NSMutableString *param = [NSMutableString string];
             for (JokeModel *model in result) {
-                [param appendFormat:@"comment-%@,", model.comment_ID];
-            }
-            [param replaceCharactersInRange:NSMakeRange(param.length-1, 1) withString:@""];
-            
-            NSString *urlStr = [NSString stringWithFormat:@"%@%@", CommentCountUrl, param];
-            return [AFNetworkClient netRequestGetWithUrl:urlStr withParameter:nil withBlock:^(id cData, FinishRequestType cFinishType, NSError *cError) {
+   
+                //获取网络图片尺寸
+                NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+                [paragraphStyle setLineSpacing:6];
+                NSMutableDictionary *attDic = [NSMutableDictionary dictionary];
+                [attDic setObject:[UIFont systemFontOfSize:16] forKey:NSFontAttributeName];
+                [attDic setObject:paragraphStyle forKey:NSParagraphStyleAttributeName];
                 
-                if (cFinishType == REQUEST_FAILED) {
+                NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:model.text_content];
+                [attributedString addAttributes:attDic range:NSMakeRange(0, model.text_content.length)];
+                model.attributedString = attributedString;
+                
+                
+                CGSize strSize = [attributedString.string boundingRectWithSize:CGSizeMake(ScreenSize.width-20, CGFLOAT_MAX)
+                                                                       options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading
+                                                                    attributes:attDic
+                                                                       context:nil].size;
+                
+                
+                
+                NSInteger width = ScreenSize.width-20;
+                NSInteger height = strSize.height+12;
+                model.textWidth = [NSNumber numberWithInteger:width];
+                model.textHeight = [NSNumber numberWithInteger:height];
+                
+            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (finishType == REQUEST_SUCESS) {
+                    if (result.count < PageSize) {
+                        if (returnBlock) {
+                            value.finishType = REQUEST_NO_MORE_DATA;
+                            value.error = nil;
+                            returnBlock(value);
+                            isNoMoreData = YES;
+                        }
+                    } else {
+                        if (returnBlock) {
+                            value.finishType = REQUEST_SUCESS;
+                            value.error = nil;
+                            returnBlock(value);
+                        }
+                    }
+                } else {
                     if (returnBlock) {
+                        value.finishType = REQUEST_FAILED;
+                        value.error = error;
                         returnBlock(value);
                     }
-                    return;
                 }
-                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                    //获取评论数量
-                    NSDictionary * cResponse = [cData objectForKey:@"response"];
-                    
-                    for (JokeModel *model in result) {
-                        //获取评论数量
-                        NSString * key = [NSString stringWithFormat:@"comment-%@",model.comment_ID];
-                        NSDictionary * cResult = [cResponse objectForKey:key];
-                        model.comment_count = [cResult getStringValueForKey:@"comments" defaultValue:@"0"];
-                        
-                        //获取网络图片尺寸
-                        NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-                        [paragraphStyle setLineSpacing:6];
-                        NSMutableDictionary *attDic = [NSMutableDictionary dictionary];
-                        [attDic setObject:[UIFont systemFontOfSize:16] forKey:NSFontAttributeName];
-                        [attDic setObject:paragraphStyle forKey:NSParagraphStyleAttributeName];
-                        
-                        NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:model.text_content];
-                        [attributedString addAttributes:attDic range:NSMakeRange(0, model.text_content.length)];
-                        model.attributedString = attributedString;
-                        
-                        
-                        CGSize strSize = [attributedString.string boundingRectWithSize:CGSizeMake(ScreenSize.width-20, CGFLOAT_MAX)
-                                                                               options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading
-                                                                            attributes:attDic
-                                                                               context:nil].size;
-                        
-                        
-                        
-                        NSInteger width = ScreenSize.width-20;
-                        NSInteger height = strSize.height+12;
-                        model.textWidth = [NSNumber numberWithInteger:width];
-                        model.textHeight = [NSNumber numberWithInteger:height];
-                        
-                    }
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        if (finishType == REQUEST_SUCESS) {
-                            if (result.count < PageSize) {
-                                if (returnBlock) {
-                                    value.finishType = REQUEST_NO_MORE_DATA;
-                                    value.error = nil;
-                                    returnBlock(value);
-                                    isNoMoreData = YES;
-                                }
-                            } else {
-                                if (returnBlock) {
-                                    value.finishType = REQUEST_SUCESS;
-                                    value.error = nil;
-                                    returnBlock(value);
-                                }
-                            }
-                        } else {
-                            if (returnBlock) {
-                                value.finishType = REQUEST_FAILED;
-                                value.error = error;
-                                returnBlock(value);
-                            }
-                        }
-                    });
-                });
-            }];
+            });
+            return;
         } else {
             if (returnBlock) {
                 returnBlock(value);
             }
-            return nil;
+            return;
         }
     }
 }

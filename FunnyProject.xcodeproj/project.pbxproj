@@ -30,14 +30,6 @@
 		5A0B97A81D3DF68D007C92E1 /* ZHPagerLongView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0B97A71D3DF68D007C92E1 /* ZHPagerLongView.m */; };
 		5A328F121D48613800FDD616 /* UMSocialLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5A328ECD1D48613700FDD616 /* UMSocialLocalizable.strings */; };
 		5A328F131D48613800FDD616 /* libUMSocial_Sdk_5.2.1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A328EDB1D48613700FDD616 /* libUMSocial_Sdk_5.2.1.a */; };
-		5A328F141D48613800FDD616 /* UMSCommentDetailController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A328EDD1D48613700FDD616 /* UMSCommentDetailController.xib */; };
-		5A328F151D48613800FDD616 /* UMSCommentInputController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A328EDE1D48613700FDD616 /* UMSCommentInputController.xib */; };
-		5A328F161D48613800FDD616 /* UMSCommentInputControlleriPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A328EDF1D48613700FDD616 /* UMSCommentInputControlleriPad.xib */; };
-		5A328F171D48613800FDD616 /* UMShareEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A328EE01D48613700FDD616 /* UMShareEditViewController.xib */; };
-		5A328F181D48613800FDD616 /* UMShareEditViewControlleriPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A328EE11D48613700FDD616 /* UMShareEditViewControlleriPad.xib */; };
-		5A328F191D48613800FDD616 /* UMSLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A328EE21D48613700FDD616 /* UMSLoginViewController.xib */; };
-		5A328F1A1D48613800FDD616 /* UMSnsAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A328EE31D48613700FDD616 /* UMSnsAccountViewController.xib */; };
-		5A328F1B1D48613800FDD616 /* UMSShareListController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A328EE41D48613700FDD616 /* UMSShareListController.xib */; };
 		5A328F1C1D48613800FDD616 /* UMSocialSDKResourcesNew.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5A328EE51D48613700FDD616 /* UMSocialSDKResourcesNew.bundle */; };
 		5A328F1D1D48613800FDD616 /* libSocialSinaSSO.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A328EE91D48613700FDD616 /* libSocialSinaSSO.a */; };
 		5A328F1E1D48613800FDD616 /* libWeiboSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A328EEA1D48613700FDD616 /* libWeiboSDK.a */; };
@@ -631,14 +623,6 @@
 		5A328ED91D48613700FDD616 /* UMSocialSnsPlatformManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocialSnsPlatformManager.h; sourceTree = "<group>"; };
 		5A328EDA1D48613700FDD616 /* UMSocialSnsService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocialSnsService.h; sourceTree = "<group>"; };
 		5A328EDB1D48613700FDD616 /* libUMSocial_Sdk_5.2.1.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUMSocial_Sdk_5.2.1.a; sourceTree = "<group>"; };
-		5A328EDD1D48613700FDD616 /* UMSCommentDetailController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UMSCommentDetailController.xib; sourceTree = "<group>"; };
-		5A328EDE1D48613700FDD616 /* UMSCommentInputController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UMSCommentInputController.xib; sourceTree = "<group>"; };
-		5A328EDF1D48613700FDD616 /* UMSCommentInputControlleriPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UMSCommentInputControlleriPad.xib; sourceTree = "<group>"; };
-		5A328EE01D48613700FDD616 /* UMShareEditViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UMShareEditViewController.xib; sourceTree = "<group>"; };
-		5A328EE11D48613700FDD616 /* UMShareEditViewControlleriPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UMShareEditViewControlleriPad.xib; sourceTree = "<group>"; };
-		5A328EE21D48613700FDD616 /* UMSLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UMSLoginViewController.xib; sourceTree = "<group>"; };
-		5A328EE31D48613700FDD616 /* UMSnsAccountViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UMSnsAccountViewController.xib; sourceTree = "<group>"; };
-		5A328EE41D48613700FDD616 /* UMSShareListController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UMSShareListController.xib; sourceTree = "<group>"; };
 		5A328EE51D48613700FDD616 /* UMSocialSDKResourcesNew.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = UMSocialSDKResourcesNew.bundle; sourceTree = "<group>"; };
 		5A328EE61D48613700FDD616 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/UMSocialLocalizable.strings"; sourceTree = "<group>"; };
 		5A328EE91D48613700FDD616 /* libSocialSinaSSO.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSocialSinaSSO.a; sourceTree = "<group>"; };
@@ -1729,7 +1713,6 @@
 				5A328ECD1D48613700FDD616 /* UMSocialLocalizable.strings */,
 				5A328ECF1D48613700FDD616 /* Header */,
 				5A328EDB1D48613700FDD616 /* libUMSocial_Sdk_5.2.1.a */,
-				5A328EDC1D48613700FDD616 /* SocialSDKXib */,
 				5A328EE51D48613700FDD616 /* UMSocialSDKResourcesNew.bundle */,
 			);
 			path = UMSocial_Sdk_5.2.1;
@@ -1751,21 +1734,6 @@
 				5A328EDA1D48613700FDD616 /* UMSocialSnsService.h */,
 			);
 			path = Header;
-			sourceTree = "<group>";
-		};
-		5A328EDC1D48613700FDD616 /* SocialSDKXib */ = {
-			isa = PBXGroup;
-			children = (
-				5A328EDD1D48613700FDD616 /* UMSCommentDetailController.xib */,
-				5A328EDE1D48613700FDD616 /* UMSCommentInputController.xib */,
-				5A328EDF1D48613700FDD616 /* UMSCommentInputControlleriPad.xib */,
-				5A328EE01D48613700FDD616 /* UMShareEditViewController.xib */,
-				5A328EE11D48613700FDD616 /* UMShareEditViewControlleriPad.xib */,
-				5A328EE21D48613700FDD616 /* UMSLoginViewController.xib */,
-				5A328EE31D48613700FDD616 /* UMSnsAccountViewController.xib */,
-				5A328EE41D48613700FDD616 /* UMSShareListController.xib */,
-			);
-			path = SocialSDKXib;
 			sourceTree = "<group>";
 		};
 		5A328EE71D48613700FDD616 /* UMSocial_Sdk_Extra_Frameworks */ = {
@@ -3791,7 +3759,6 @@
 				5A328F291D48613800FDD616 /* ios-social-sdk-comment-quick.html in Resources */,
 				5A97C6751D3F5ECF00CBF483 /* favorite_click@2x.png in Resources */,
 				5A97C6811D3F5ECF00CBF483 /* QQZone_click@2x.png in Resources */,
-				5A328F191D48613800FDD616 /* UMSLoginViewController.xib in Resources */,
 				5A97C6831D3F5ECF00CBF483 /* report@2x.png in Resources */,
 				5A328F1F1D48613800FDD616 /* WeiboSDK.bundle in Resources */,
 				5A0B97861D3CA1EB007C92E1 /* SVWebViewController.strings in Resources */,
@@ -3811,7 +3778,6 @@
 				5AF5D30E1D2FB562004070D7 /* demo.css in Resources */,
 				5A97C6731D3F5ECF00CBF483 /* favorite@2x.png in Resources */,
 				5A328F2D1D48613800FDD616 /* ios-social-sdk-shake.html in Resources */,
-				5A328F151D48613800FDD616 /* UMSCommentInputController.xib in Resources */,
 				5A97C67D1D3F5ECF00CBF483 /* QQ_click@2x.png in Resources */,
 				5AF5D2881D2F7D03004070D7 /* PlayButtonOverlayLarge@3x.png in Resources */,
 				5A97C68B1D3F5ECF00CBF483 /* sinaWeibo@2x.png in Resources */,
@@ -3826,8 +3792,6 @@
 				5AF5D27D1D2F7D03004070D7 /* ImageSelectedOn.png in Resources */,
 				5AF5D28C1D2F7D03004070D7 /* UIBarButtonItemArrowLeft.png in Resources */,
 				5A97C6891D3F5ECF00CBF483 /* share_pengyou_click@2x.png in Resources */,
-				5A328F161D48613800FDD616 /* UMSCommentInputControlleriPad.xib in Resources */,
-				5A328F1A1D48613800FDD616 /* UMSnsAccountViewController.xib in Resources */,
 				5AF5D2901D2F7D03004070D7 /* UIBarButtonItemArrowRight@2x.png in Resources */,
 				5AF5D2851D2F7D03004070D7 /* ImageSelectedSmallOn@3x.png in Resources */,
 				5AF5D2931D2F7D03004070D7 /* UIBarButtonItemGrid@2x.png in Resources */,
@@ -3845,9 +3809,7 @@
 				5A97C6CF1D40BBF700CBF483 /* slider_max@2x.png in Resources */,
 				5A97C6BF1D40BBF700CBF483 /* bullet_set_nor@2x.png in Resources */,
 				5AD5D29F1D49D33900E8E5EE /* zhifubao.png in Resources */,
-				5A328F181D48613800FDD616 /* UMShareEditViewControlleriPad.xib in Resources */,
 				5A328F2E1D48613800FDD616 /* ios-social-sdk-share-detail.html in Resources */,
-				5A328F1B1D48613800FDD616 /* UMSShareListController.xib in Resources */,
 				5AF5D2781D2F7D03004070D7 /* ImageError@2x.png in Resources */,
 				5A97C6671D3F5ECF00CBF483 /* copyLink@2x.png in Resources */,
 				5AF5D2DF1D2FA014004070D7 /* play_btn_icon@3x.png in Resources */,
@@ -3857,7 +3819,6 @@
 				5AF5D2871D2F7D03004070D7 /* PlayButtonOverlayLarge@2x.png in Resources */,
 				5AF5D2941D2F7D03004070D7 /* UIBarButtonItemGrid@3x.png in Resources */,
 				5AF5D2951D2F7D03004070D7 /* VideoOverlay.png in Resources */,
-				5A328F171D48613800FDD616 /* UMShareEditViewController.xib in Resources */,
 				5AF5D28B1D2F7D03004070D7 /* PlayButtonOverlayLargeTap@3x.png in Resources */,
 				5A52F99F1D4F58120081E896 /* ThemeColor.txt in Resources */,
 				5AF5D2291D2F7CBA004070D7 /* nav_bg@2x.png in Resources */,
@@ -3886,7 +3847,6 @@
 				5A0B978E1D3CA1EB007C92E1 /* SVWebViewControllerActivitySafari-iPad.png in Resources */,
 				5AF5D27E1D2F7D03004070D7 /* ImageSelectedOn@2x.png in Resources */,
 				5A97C6871D3F5ECF00CBF483 /* share_pengyou@2x.png in Resources */,
-				5A328F141D48613800FDD616 /* UMSCommentDetailController.xib in Resources */,
 				5AF5D2801D2F7D03004070D7 /* ImageSelectedSmallOff.png in Resources */,
 				5AF5D2861D2F7D03004070D7 /* PlayButtonOverlayLarge.png in Resources */,
 				5A97C67F1D3F5ECF00CBF483 /* QQZone@2x.png in Resources */,

@@ -96,7 +96,8 @@
     NSDate *date = [NSDate dateWithString:model.comment_date format:@"yyyy-MM-dd HH:mm:ss"];
     NSString *time = [date timeAgoSinceNow];
     describLabel.text = [NSString stringWithFormat:@"%@ @%@", model.comment_author, time];
-    commentLabel.text = [NSString stringWithFormat:@"\U0000e717 %@   |   \U0000e716 %@   |   \U0000e69f %@  ",model.vote_positive, model.vote_negative, model.comment_count];
+//    commentLabel.text = [NSString stringWithFormat:@"\U0000e717 %@   |   \U0000e716 %@   |   \U0000e69f %@  ",model.vote_positive, model.vote_negative, model.comment_count];
+        commentLabel.text = [NSString stringWithFormat:@"\U0000e717 %@   |   \U0000e716 %@   ",model.vote_positive, model.vote_negative];
     
     contentLabel.attributedText = model.attributedString;
     [commentLabel sizeToFit];

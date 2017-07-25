@@ -248,6 +248,10 @@
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
     if ([text isEqualToString:@"\n"]){
+        
+        //暂时取消评论功能
+        [[ToastHelper sharedToastHelper] toast:@"暂时取消评论功能"];
+        return NO;
         //发送
         NSLog(@"textView.text = %@", textView.text);
         if (textView.text == nil || textView.text.length <= 0) {

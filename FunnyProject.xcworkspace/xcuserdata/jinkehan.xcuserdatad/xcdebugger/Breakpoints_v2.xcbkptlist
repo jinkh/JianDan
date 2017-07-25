@@ -2,4 +2,85 @@
 <Bucket
    type = "0"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FunnyProject/AFNetWork/AFNetworkClient.m"
+            timestampString = "505746662.331063"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "70"
+            endingLineNumber = "70"
+            landmarkName = "+netRequestPostWithUrl:withParameter:withBlock:"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__65+[AFNetworkClient netRequestPostWithUrl:withParameter:withBlock:]_block_invoke.84"
+                  moduleName = "FunnyProject"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/nice/Desktop/Desk/Code/JianDan/FunnyProject/AFNetWork/AFNetworkClient.m"
+                  timestampString = "522646400.125753"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "70"
+                  endingLineNumber = "70"
+                  offsetFromSymbolStart = "196">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__copy_helper_block_.85"
+                  moduleName = "FunnyProject"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/nice/Desktop/Desk/Code/JianDan/FunnyProject/AFNetWork/AFNetworkClient.m"
+                  timestampString = "522646400.128219"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "70"
+                  endingLineNumber = "70"
+                  offsetFromSymbolStart = "56">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__destroy_helper_block_.86"
+                  moduleName = "FunnyProject"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/nice/Desktop/Desk/Code/JianDan/FunnyProject/AFNetWork/AFNetworkClient.m"
+                  timestampString = "522646400.129765"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "70"
+                  endingLineNumber = "70"
+                  offsetFromSymbolStart = "36">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FunnyProject/Libs/LongVideo/TvMovieView.m"
+            timestampString = "510636274.88393"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "26"
+            endingLineNumber = "26"
+            landmarkName = "@interface TvMovieView()"
+            landmarkType = "2">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

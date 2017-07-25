@@ -122,7 +122,7 @@
 }
 
 
--(NSURLSessionDataTask *)deallWithReturnData:(id)data withFinishType:(FinishRequestType)finishType withError:(NSError *)error withBlock:(ReturnBlock) returnBlock
+-(void)deallWithReturnData:(id)data withFinishType:(FinishRequestType)finishType withError:(NSError *)error withBlock:(ReturnBlock) returnBlock
 {
     @synchronized(self) {
         
@@ -133,93 +133,69 @@
         if (finishType != REQUEST_FAILED) {
             NSArray *list = [data getArrayValueForKey:@"comments" defaultValue:nil];
             if (list.count <= 0) {
-                return nil;
+                return;
             }
             NSMutableArray *result = [PictureModel arrayOfModelsFromDictionaries:list error:nil];
             value.data = result;
-            NSMutableString *param = [NSMutableString string];
-            for (PictureModel *model in result) {
-                [param appendFormat:@"comment-%@,", model.comment_ID];
-            }
-            [param replaceCharactersInRange:NSMakeRange(param.length-1, 1) withString:@""];
+            [queue cancelAllOperations];
             
-            NSString *urlStr = [NSString stringWithFormat:@"%@%@", CommentCountUrl, param];
-            return [AFNetworkClient netRequestGetWithUrl:urlStr withParameter:nil withBlock:^(id cData, FinishRequestType cFinishType, NSError *cError) {
-                
-                if (cFinishType == REQUEST_FAILED) {
-                    if (returnBlock) {
-                        returnBlock(value);
+            __block NSInteger operationCount = result.count;
+            
+            for (PictureModel *model in result) {
+                NSBlockOperation *operation = [[NSBlockOperation alloc] init];
+                __weak NSBlockOperation *weakOperation = operation;
+                [operation addExecutionBlock:^{
+                    if (weakOperation.isCancelled) {
+                        return;
                     }
-                    return;
-                }
-                
-                //获取评论数量
-                NSDictionary * cResponse = [cData objectForKey:@"response"];
-                
-                [queue cancelAllOperations];
-                
-                __block NSInteger operationCount = result.count;
-                
-                for (PictureModel *model in result) {
-                    NSBlockOperation *operation = [[NSBlockOperation alloc] init];
-                    __weak NSBlockOperation *weakOperation = operation;
-                    [operation addExecutionBlock:^{
-                        if (weakOperation.isCancelled) {
-                            return;
-                        }
-                        //获取评论数量
-                        NSString * key = [NSString stringWithFormat:@"comment-%@",model.comment_ID];
-                        NSDictionary * cResult = [cResponse objectForKey:key];
-                        model.comment_count = [cResult getStringValueForKey:@"comments" defaultValue:@"0"];
-                        
-                        //获取网络图片尺寸
-                        
-                        for (PictureSourceModel *item in model.pics) {
-                            CGSize picSize = [ZHURLImageSize getImageSizeWithURL:[NSURL URLWithString:item.url]];
-                            NSInteger width = ScreenSize.width-10;
-                            NSInteger height = picSize.height*width/picSize.width;
-                            item.picWidth = [NSNumber numberWithInteger:width];
-                            item.picHeight = [NSNumber numberWithInteger:height];
-                        }
-                    }];
-                    [operation setCompletionBlock:^{
-                        operationCount--;
-                        NSLog(@"operationCount = %ld", operationCount);
-                        if (operationCount == 0) {
-                            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                                if (finishType == REQUEST_SUCESS) {
-                                    if (result.count < PageSize) {
-                                        if (returnBlock) {
-                                            value.finishType = REQUEST_NO_MORE_DATA;
-                                            value.error = nil;
-                                            returnBlock(value);
-                                            isNoMoreData = YES;
-                                        }
-                                    } else {
-                                        if (returnBlock) {
-                                            value.finishType = REQUEST_SUCESS;
-                                            value.error = nil;
-                                            returnBlock(value);
-                                        }
+                    
+                    //获取网络图片尺寸
+                    for (PictureSourceModel *item in model.pics) {
+                        CGSize picSize = [ZHURLImageSize getImageSizeWithURL:[NSURL URLWithString:item.url]];
+                        NSInteger width = ScreenSize.width-10;
+                        NSInteger height = picSize.height*width/picSize.width;
+                        item.picWidth = [NSNumber numberWithInteger:width];
+                        item.picHeight = [NSNumber numberWithInteger:height];
+                    }
+                }];
+                [operation setCompletionBlock:^{
+                    operationCount--;
+                    NSLog(@"operationCount = %ld", operationCount);
+                    if (operationCount == 0) {
+                        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                            if (finishType == REQUEST_SUCESS) {
+                                if (result.count < PageSize) {
+                                    if (returnBlock) {
+                                        value.finishType = REQUEST_NO_MORE_DATA;
+                                        value.error = nil;
+                                        returnBlock(value);
+                                        isNoMoreData = YES;
                                     }
                                 } else {
                                     if (returnBlock) {
-                                        value.finishType = REQUEST_FAILED;
-                                        value.error = error;
+                                        value.finishType = REQUEST_SUCESS;
+                                        value.error = nil;
                                         returnBlock(value);
                                     }
                                 }
-                            }];
-                        }
-                    }];
-                    [queue addOperation:operation];
-                }
-            }];
+                            } else {
+                                if (returnBlock) {
+                                    value.finishType = REQUEST_FAILED;
+                                    value.error = error;
+                                    returnBlock(value);
+                                }
+                            }
+                        }];
+                    }
+                }];
+                [queue addOperation:operation];
+            }
+            return;
         } else {
             if (returnBlock) {
                 returnBlock(value);
             }
-            return nil;
+            return;
         }
     }
 }

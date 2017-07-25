@@ -128,7 +128,7 @@
     NSDate *date = [NSDate dateWithString:myData.comment_date format:@"yyyy-MM-dd HH:mm:ss"];
     NSString *time = [date timeAgoSinceNow];
     describLabel.text = [NSString stringWithFormat:@"%@ @%@", myData.comment_author, time];
-    commentLabel.text = [NSString stringWithFormat:@"\U0000e717 %@   |   \U0000e716 %@   |   \U0000e69f %@",myData.vote_positive, myData.vote_negative, myData.comment_count];
+    commentLabel.text = [NSString stringWithFormat:@"\U0000e717 %@   |   \U0000e716 %@   ",myData.vote_positive, myData.vote_negative];
     
     
     
