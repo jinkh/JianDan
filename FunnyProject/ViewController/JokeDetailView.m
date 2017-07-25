@@ -60,7 +60,7 @@
         indicatorView.frame = CGRectMake(0, headerView.bounds.size.height+5, ScreenSize.width, 30);
         indicatorView.hidesWhenStopped = YES;
         [indicatorView startAnimating];
-        [myTableView addSubview:indicatorView];
+        //[myTableView addSubview:indicatorView];
         
         
         __weak typeof(self) weakSelf = self;

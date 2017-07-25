@@ -51,14 +51,6 @@
         value.finishType = finishType;
         value.error = error;
         
-        //暂时取消评论功能
-        if (returnBlock) {
-            value.finishType = REQUEST_FAILED;
-            value.error = error;
-            returnBlock(value);
-        }
-        return;
-        
         NSDictionary *threadDic = [data getDicValueForKey:@"thread" defaultValue:nil];
         
         threadId =[threadDic getStringValueForKey:@"thread_id" defaultValue:@""];
