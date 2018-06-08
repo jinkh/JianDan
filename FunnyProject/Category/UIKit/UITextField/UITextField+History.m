@@ -50,6 +50,12 @@ static char kTextFieldHistoryviewIdentifyKey;
         table.layer.borderWidth = 1;
         table.delegate = self;
         table.dataSource = self;
+        if (@available(iOS 11.0, *)) {
+            table.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+            table.estimatedRowHeight = 0;
+            table.estimatedSectionHeaderHeight = 0;
+            table.estimatedSectionFooterHeight = 0;
+        }
         objc_setAssociatedObject(self, &kTextFieldHistoryviewIdentifyKey, table, OBJC_ASSOCIATION_RETAIN);
     }
     

@@ -25,8 +25,8 @@
                   symbolName = "__65+[AFNetworkClient netRequestPostWithUrl:withParameter:withBlock:]_block_invoke.84"
                   moduleName = "FunnyProject"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/nice/Desktop/Desk/Code/JianDan/FunnyProject/AFNetWork/AFNetworkClient.m"
-                  timestampString = "522647375.218633"
+                  urlString = "file:///Users/jinkehan/Desktop/JianDan/FunnyProject/AFNetWork/AFNetworkClient.m"
+                  timestampString = "550120048.049404"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "70"
@@ -40,28 +40,13 @@
                   symbolName = "__copy_helper_block_.85"
                   moduleName = "FunnyProject"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/nice/Desktop/Desk/Code/JianDan/FunnyProject/AFNetWork/AFNetworkClient.m"
-                  timestampString = "522647375.220308"
+                  urlString = "file:///Users/jinkehan/Desktop/JianDan/FunnyProject/AFNetWork/AFNetworkClient.m"
+                  timestampString = "550120048.051892"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "70"
-                  endingLineNumber = "70"
-                  offsetFromSymbolStart = "56">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__destroy_helper_block_.86"
-                  moduleName = "FunnyProject"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/nice/Desktop/Desk/Code/JianDan/FunnyProject/AFNetWork/AFNetworkClient.m"
-                  timestampString = "522647375.221925"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "70"
-                  endingLineNumber = "70"
-                  offsetFromSymbolStart = "36">
+                  startingLineNumber = "68"
+                  endingLineNumber = "68"
+                  offsetFromSymbolStart = "24">
                </Location>
             </Locations>
          </BreakpointContent>

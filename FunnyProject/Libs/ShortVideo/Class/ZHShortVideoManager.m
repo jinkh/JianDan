@@ -9,7 +9,7 @@
 #import "ZHShortVideoManager.h"
 #import "TvMovieFullController.h"
 
-#define CenterY (32+[[UIScreen mainScreen] bounds].size.height*.5)
+#define CenterY ([[UIScreen mainScreen] bounds].size.height*.5)
 
 
 @interface ZHShortVideoManager()
@@ -24,11 +24,9 @@
     
      BOOL  isVisible;
     
-    NSMutableArray *dataArrray;
+    NSHashTable *dataArrray;
     
     CFRunLoopObserverRef observe;
-    
-    NSMutableArray *registeredNotifications;
 
     __weak ZHShortPlayerView *lastView;
     
@@ -67,9 +65,8 @@ static BOOL shouldAutoPaly;
         isShowInWindow = NO;
         shouldCheckOnTracking = NO;
         shouldReplayWhenVisibleAgain = YES;
-        dataArrray = [[NSMutableArray alloc] init];
+        dataArrray = [NSHashTable hashTableWithOptions:NSPointerFunctionsWeakMemory];
         _identifier = [[NSString alloc] initWithFormat:@"%@", ident];
-        registeredNotifications = [[NSMutableArray alloc] init];
         
         //初始化播放器
         [self resetIJKVieoPlayWithUrl:@""];
@@ -84,66 +81,66 @@ static BOOL shouldAutoPaly;
 -(void)checkPlayState
 {
     @autoreleasepool {
+        //系统的滑动返回过程忽略,如使用的UINavigationController+FDFullscreenPopGesture,请切换为fd_fullscreenPopGestureRecognizer
+        BOOL transing = NO;
+        if ([[UIApplication sharedApplication].keyWindow.rootViewController isKindOfClass:[UINavigationController class]]) {
+            UIGestureRecognizerState state = ((UINavigationController *)[UIApplication sharedApplication].keyWindow.rootViewController).zh_fullscreenPopGestureRecognizer.state;
+            
+            transing =  (state == UIGestureRecognizerStateBegan || state == UIGestureRecognizerStateChanged);
+        }
+        if (transing) {
+            return;
+        }
         
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            //系统的滑动返回过程忽略,如使用的UINavigationController+FDFullscreenPopGesture,请切换为fd_fullscreenPopGestureRecognizer
-            BOOL transing = NO;
-            if ([[UIApplication sharedApplication].keyWindow.rootViewController isKindOfClass:[UINavigationController class]]) {
-                UIGestureRecognizerState state = ((UINavigationController *)[UIApplication sharedApplication].keyWindow.rootViewController).zh_fullscreenPopGestureRecognizer.state;
-                
-                transing =  (state == UIGestureRecognizerStateBegan || state == UIGestureRecognizerStateChanged);
+        //页面切换后，不可见
+        BOOL showInWindow = NO;
+        ZHShortPlayerView *chekView = nil;
+        for (ZHShortPlayerView *view in dataArrray) {
+            if (view.window) {
+                showInWindow = YES;
+                chekView = view;
+                break;
             }
-            if (transing) {
-                return;
-            }
-            
-            //页面切换后，不可见
-            ZHShortPlayerView *chekView = dataArrray.firstObject;
-            BOOL showInWindow = (chekView.window == nil ? NO : YES);
-            
-            if (isShowInWindow && !showInWindow) {
+        }
+        
+        if (isShowInWindow && !showInWindow) {
+            [self becomeInvisible];
+        }
+        if (!isShowInWindow && showInWindow) {
+            [self becomeVisible];
+        }
+        isShowInWindow = showInWindow;
+        
+        
+        if (isShowInWindow && ![[self getPresentedViewController] isKindOfClass:[TvMovieFullController class]]) {
+            //scrollview 左右滑动导致可见状态变化
+            CGRect rect = [chekView convertRect:chekView.frame toView:[UIApplication sharedApplication].keyWindow];
+            BOOL visible = rect.origin.x >= 0 && (rect.origin.x+rect.size.width) <= [UIScreen mainScreen].bounds.size.width;
+            if (!visible && isVisible) {
                 [self becomeInvisible];
             }
-            if (!isShowInWindow && showInWindow) {
+            if (visible && !isVisible) {
                 [self becomeVisible];
             }
-            isShowInWindow = showInWindow;
-            
-            
-            if (isShowInWindow && ![[self getPresentedViewController] isKindOfClass:[TvMovieFullController class]]) {
-                //scrollview 左右滑动导致可见状态变化
-                CGRect rect = [chekView convertRect:chekView.frame toView:[UIApplication sharedApplication].keyWindow];
-                BOOL visible = rect.origin.x >= 0 && (rect.origin.x+rect.size.width) <= [UIScreen mainScreen].bounds.size.width;
-                if (!visible && isVisible) {
-                    [self becomeInvisible];
-                }
-                if (visible && !isVisible) {
-                    [self becomeVisible];
-                }
-                isVisible = visible;
-            }
-            if (!isShowInWindow || !isVisible) {
-                //NSLog(@"%@已经切换到可见，直接返回", _identifier);
-                return;
-            }
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                BOOL tracking = [NSRunLoop currentRunLoop].currentMode == UITrackingRunLoopMode;
-                if (tracking && !isTracking) {
-                    [self beginTrack];
-                }
-                if (tracking) {
-                    [self onTracking];
-                }
-                if (!tracking && isTracking) {
-                    //添加延时，避免在setVideoUrl
-                    [self endTrack];
-                }
-                isTracking = tracking;
-            });
-        });
+            isVisible = visible;
+        }
+        if (!isShowInWindow || !isVisible) {
+            //NSLog(@"%@已经切换到可见，直接返回", _identifier);
+            return;
+        }
         
-        
+        BOOL tracking = [NSRunLoop currentRunLoop].currentMode == UITrackingRunLoopMode;
+        if (tracking && !isTracking) {
+            [self beginTrack];
+        }
+        if (tracking) {
+            [self onTracking];
+        }
+        if (!tracking && isTracking) {
+            //添加延时，避免在setVideoUrl
+            [self endTrack];
+        }
+        isTracking = tracking;
     }
 }
 
@@ -250,11 +247,15 @@ static BOOL shouldAutoPaly;
 -(ZHShortPlayerView *)getCurrentShouldPlayView
 {
     ZHShortPlayerView *pview = nil;
-    CGPoint lastPos =CGPointZero;
+    CGPoint lastPos = CGPointZero;
     for (ZHShortPlayerView *view in dataArrray) {
         if ([self isDisplayedInScreen:view]) {
             CGPoint pos = [view convertPoint:view.center toView:[UIApplication sharedApplication].keyWindow];
-            if (fabs(lastPos.y-CenterY) > fabs(pos.y-CenterY)) {
+            if (CGPointEqualToPoint(lastPos, CGPointZero)) {
+                lastPos = pos;
+                pview = view;
+            } else if (fabs(lastPos.y-CenterY > 0 ? lastPos.y-CenterY-pview.frame.size.height*.5 : CenterY-lastPos.y-pview.frame.size.height*.5)
+                       > fabs(pos.y-CenterY > 0 ? pos.y-CenterY-view.frame.size.height*.5 : CenterY-pos.y-view.frame.size.height*.5)) {
                 lastPos = pos;
                 pview = view;
             }
@@ -304,25 +305,21 @@ static BOOL shouldAutoPaly;
                                              selector:@selector(applicationWillEnterForeground)
                                                  name:UIApplicationWillEnterForegroundNotification
                                                object:nil];
-    [registeredNotifications addObject:UIApplicationWillEnterForegroundNotification];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(applicationDidBecomeActive)
                                                  name:UIApplicationDidBecomeActiveNotification
                                                object:nil];
-    [registeredNotifications addObject:UIApplicationDidBecomeActiveNotification];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(applicationWillResignActive)
                                                  name:UIApplicationWillResignActiveNotification
                                                object:nil];
-    [registeredNotifications addObject:UIApplicationWillResignActiveNotification];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(applicationDidEnterBackground)
                                                  name:UIApplicationDidEnterBackgroundNotification
                                                object:nil];
-    [registeredNotifications addObject:UIApplicationDidEnterBackgroundNotification];
     
 
     //监听滚动到顶部
@@ -330,7 +327,6 @@ static BOOL shouldAutoPaly;
                                              selector:@selector(didScrollToTop:)
                                                  name:ZHScrollToTopNotification
                                                object:nil];
-    [registeredNotifications addObject:ZHScrollToTopNotification];
     
     
     //监听滑动状态变化
@@ -345,11 +341,7 @@ static BOOL shouldAutoPaly;
 
 - (void)unregisterObservers
 {
-    for (NSString *name in registeredNotifications) {
-        [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                        name:name
-                                                      object:nil];
-    }
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     CFRunLoopRemoveObserver(CFRunLoopGetCurrent(), observe, kCFRunLoopCommonModes);
 }
 
@@ -426,7 +418,7 @@ static BOOL shouldAutoPaly;
 
 @implementation ZHShortVideoManagerDequeue
 
-static NSMutableDictionary *resumeManagerData;
+static NSMapTable *resumeManagerData;
 
 -(void)dealloc
 {
@@ -441,7 +433,7 @@ static NSMutableDictionary *resumeManagerData;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         sharedClient = [[ZHShortVideoManagerDequeue alloc] init];
-        resumeManagerData =  [[NSMutableDictionary alloc] init];
+        resumeManagerData =  [NSMapTable mapTableWithKeyOptions:NSPointerFunctionsStrongMemory valueOptions:NSPointerFunctionsWeakMemory];
         
     });
     return sharedClient;

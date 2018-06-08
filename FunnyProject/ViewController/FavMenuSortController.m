@@ -48,6 +48,12 @@
     myTableView.scrollsToTop = NO;
     myTableView.showsVerticalScrollIndicator = YES;
     myTableView.backgroundColor = [UIColor clearColor];
+    if (@available(iOS 11.0, *)) {
+        myTableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+        myTableView.estimatedRowHeight = 0;
+        myTableView.estimatedSectionHeaderHeight = 0;
+        myTableView.estimatedSectionFooterHeight = 0;
+    }
     [self.view addSubview:myTableView];
     
     if ([myTableView respondsToSelector:@selector(setCellLayoutMarginsFollowReadableWidth:)]) {

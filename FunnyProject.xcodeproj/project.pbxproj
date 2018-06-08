@@ -3704,7 +3704,7 @@
 				TargetAttributes = {
 					5A8FD94B1D2DFC270015D6C0 = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = 9437NAGUWD;
+						DevelopmentTeam = SCS36358A3;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.InAppPurchase = {
@@ -4525,7 +4525,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Jian Ren (69USC54WEB)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 9437NAGUWD;
+				DEVELOPMENT_TEAM = SCS36358A3;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4543,7 +4543,7 @@
 					"$(PROJECT_DIR)/FunnyProject/Libs/umeng_ios_social_sdk_5.2.1_arm64_custom/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/FunnyProject/Libs/umeng_ios_social_sdk_5.2.1_arm64_custom/UMSocial_Sdk_Extra_Frameworks/Wechat",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.jinkh.funny;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jinkh.funny.jkh;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -4559,7 +4559,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Jian Ren (69USC54WEB)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 9437NAGUWD;
+				DEVELOPMENT_TEAM = SCS36358A3;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4577,7 +4577,7 @@
 					"$(PROJECT_DIR)/FunnyProject/Libs/umeng_ios_social_sdk_5.2.1_arm64_custom/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
 					"$(PROJECT_DIR)/FunnyProject/Libs/umeng_ios_social_sdk_5.2.1_arm64_custom/UMSocial_Sdk_Extra_Frameworks/Wechat",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.jinkh.funny;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jinkh.funny.jkh;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
