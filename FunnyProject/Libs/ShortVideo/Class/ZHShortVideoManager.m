@@ -146,72 +146,62 @@ static BOOL shouldAutoPaly;
 
 -(void)beginTrack
 {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        //开始滑动
-        shouldCheckOnTracking = YES;
-        NSLog(@"%@  beginTrack", _identifier);
-    });
+    //开始滑动
+    shouldCheckOnTracking = YES;
+    NSLog(@"%@  beginTrack", _identifier);
 }
 
 
 -(void)onTracking
 {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        //滑动过程
-        if (shouldCheckOnTracking && ![self isDisplayedInScreen:lastView]) {
-            [lastView shutDownPlay];
-            shouldCheckOnTracking = NO;
-        }
-        NSLog(@"%@  onTracking", _identifier);
-    });
+    //滑动过程
+    if (shouldCheckOnTracking && ![self isDisplayedInScreen:lastView]) {
+        [lastView shutDownPlay];
+        shouldCheckOnTracking = NO;
+    }
+    NSLog(@"%@  onTracking", _identifier);
 }
 
 -(void)endTrack
 {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        //滑动结束
-        shouldCheckOnTracking = NO;
-        if (shouldAutoPaly) {
-            ZHShortPlayerView *pview = [self getCurrentShouldPlayView];
-            if (pview) {
-                if (lastView && lastView != pview) {
-                    [lastView shutDownPlay];
-                }
-                [self resetIJKVieoPlayWithUrl:pview.videoUrl];
-                [pview play];
-                lastView = pview;
+    //滑动结束
+    shouldCheckOnTracking = NO;
+    if (shouldAutoPaly) {
+        ZHShortPlayerView *pview = [self getCurrentShouldPlayView];
+        if (pview) {
+            if (lastView && lastView != pview) {
+                [lastView shutDownPlay];
             }
+            [self resetIJKVieoPlayWithUrl:pview.videoUrl];
+            [pview play];
+            lastView = pview;
         }
-        NSLog(@"%@  endTrack", _identifier);
-    });
+    }
+    NSLog(@"%@  endTrack", _identifier);
 }
 
 -(void)becomeVisible
 {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        //切换到可见
-        if (shouldReplayWhenVisibleAgain == NO) {
-            [lastView addSubview:_moviePlayer];
-            shouldReplayWhenVisibleAgain = YES;
-        } else {
-            [self endTrack];
-        }
-        NSLog(@"%@  becomeVisible", _identifier);
-    });
+    //切换到可见
+    if (shouldReplayWhenVisibleAgain == NO) {
+        [lastView addSubview:_moviePlayer];
+        shouldReplayWhenVisibleAgain = YES;
+    } else {
+        [self endTrack];
+    }
+    NSLog(@"%@  becomeVisible", _identifier);
 }
 
 -(void)becomeInvisible
 {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        //切换到不可见
-        if ([[self getPresentedViewController] isKindOfClass:[TvMovieFullController class]]) {
-            shouldReplayWhenVisibleAgain = NO;
-        } else {
-            [_moviePlayer destory];
-        }
-        
-        NSLog(@"%@  becomeInvisible", _identifier);
-    });
+    //切换到不可见
+    if ([[self getPresentedViewController] isKindOfClass:[TvMovieFullController class]]) {
+        shouldReplayWhenVisibleAgain = NO;
+    } else {
+        [_moviePlayer destory];
+    }
+    
+    NSLog(@"%@  becomeInvisible", _identifier);
 }
 
 -(void)didScrollToTop:(NSNotification *)notification

@@ -9,61 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "FunnyProject/AFNetWork/AFNetworkClient.m"
-            timestampString = "505746662.331063"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "70"
-            endingLineNumber = "70"
-            landmarkName = "+netRequestPostWithUrl:withParameter:withBlock:"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__65+[AFNetworkClient netRequestPostWithUrl:withParameter:withBlock:]_block_invoke.84"
-                  moduleName = "FunnyProject"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/jinkehan/Desktop/JianDan/FunnyProject/AFNetWork/AFNetworkClient.m"
-                  timestampString = "550121584.516584"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "70"
-                  endingLineNumber = "70"
-                  offsetFromSymbolStart = "196">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__copy_helper_block_.85"
-                  moduleName = "FunnyProject"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/jinkehan/Desktop/JianDan/FunnyProject/AFNetWork/AFNetworkClient.m"
-                  timestampString = "550121584.518591"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "68"
-                  endingLineNumber = "68"
-                  offsetFromSymbolStart = "24">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "FunnyProject/Libs/LongVideo/TvMovieView.m"
             timestampString = "510636274.88393"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "26"
             endingLineNumber = "26"
-            landmarkName = "@interface TvMovieView()"
+            landmarkName = "TvMovieView()"
             landmarkType = "2">
          </BreakpointContent>
       </BreakpointProxy>
