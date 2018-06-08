@@ -220,11 +220,9 @@ static BOOL shouldAutoPaly;
     
 }
 
--(void)resetLastViewForNotAuto:(ZHShortPlayerView *)view
+-(void)resetLastView:(ZHShortPlayerView *)view
 {
-    if (shouldAutoPaly == NO) {
-        lastView = view;
-    }
+    lastView = view;
 }
 
 

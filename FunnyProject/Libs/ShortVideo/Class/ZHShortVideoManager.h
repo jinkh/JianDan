@@ -27,7 +27,7 @@
 
 -(void)resetIJKVieoPlayWithUrl:(NSString *)url;
 
--(void)resetLastViewForNotAuto:(ZHShortPlayerView *)view;
+-(void)resetLastView:(ZHShortPlayerView *)view;
 
 @property (strong, readonly)  NSString *identifier;
 

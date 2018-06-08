@@ -26,7 +26,7 @@
                   moduleName = "FunnyProject"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/jinkehan/Desktop/JianDan/FunnyProject/AFNetWork/AFNetworkClient.m"
-                  timestampString = "550120048.049404"
+                  timestampString = "550121584.516584"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "70"
@@ -41,7 +41,7 @@
                   moduleName = "FunnyProject"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/jinkehan/Desktop/JianDan/FunnyProject/AFNetWork/AFNetworkClient.m"
-                  timestampString = "550120048.051892"
+                  timestampString = "550121584.518591"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "68"
@@ -65,6 +65,22 @@
             endingLineNumber = "26"
             landmarkName = "@interface TvMovieView()"
             landmarkType = "2">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FunnyProject/ViewController/VideoController.m"
+            timestampString = "550121584.293312"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "287"
+            endingLineNumber = "287"
+            landmarkName = "-tableView:didSelectRowAtIndexPath:"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

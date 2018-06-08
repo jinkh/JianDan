@@ -62,15 +62,15 @@
 
 -(void)tapAction:(UITapGestureRecognizer *)getsure
 {
-    if ([ZHShortVideoManager getShouldAutoPlay] == NO) {
+   // if ([ZHShortVideoManager getShouldAutoPlay] == NO) {
         [manager resetIJKVieoPlayWithUrl:_videoUrl];
         manager.moviePlayer.frame = self.bounds;
         [manager.moviePlayer setNeedsDisplay];
         [manager.moviePlayer resumePlay];
         [self addSubview:manager.moviePlayer];
         
-        [manager resetLastViewForNotAuto:self];
-    }
+        [manager resetLastView:self];
+    //}
 }
 
 
