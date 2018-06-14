@@ -92,6 +92,13 @@
         myTableView.showsVerticalScrollIndicator = YES;
         myTableView.hidden = YES;
         myTableView.backgroundColor = [UIColor clearColor];
+        
+        if (@available(iOS 11.0, *)) {
+            myTableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+            myTableView.estimatedRowHeight = 0;
+            myTableView.estimatedSectionHeaderHeight = 0;
+            myTableView.estimatedSectionFooterHeight = 0;
+        }
         [self addSubview:myTableView];
         
         

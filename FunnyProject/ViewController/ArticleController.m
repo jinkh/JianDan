@@ -83,6 +83,13 @@
     myTableView.backgroundColor = [UIColor clearColor];
     myTableView.emptyDataSetDelegate= self;
     myTableView.emptyDataSetSource = self;
+    
+    if (@available(iOS 11.0, *)) {
+        myTableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+        myTableView.estimatedRowHeight = 0;
+        myTableView.estimatedSectionHeaderHeight = 0;
+        myTableView.estimatedSectionFooterHeight = 0;
+    }
     [self.view addSubview:myTableView];
     
     myTableView.header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(mjRefreshData)];
